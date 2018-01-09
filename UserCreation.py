@@ -1,3 +1,5 @@
+#!C:\Python27\python.exe
+
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
