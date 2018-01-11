@@ -20,8 +20,7 @@ class login(unittest.TestCase):
         self.desig = ""
         self.contactaddr = ""
 
-    def test_01_enter_user_details(self):
-
+    def test_01_login_user(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
@@ -48,7 +47,8 @@ class login(unittest.TestCase):
         # self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
         self.driver.find_element_by_id("btnSubmit").click()
-        self.assertIn(self.driver.find_element_by_xpath("//*[@id=\"form1\"]/div[2]/div/span").text, "The Email field is not a valid e-mail address.")
+        self.assertIn(self.driver.find_element_by_xpath("//*[@id=\"form1\"]/div[2]/div/span").text,
+                      "The Email field is not a valid e-mail address.")
         print self.driver.find_element_by_xpath("//*[@id=\"form1\"]/div[2]/div/span").text
         time.sleep(2)
         self.driver.find_element_by_id("Email").clear()
@@ -57,6 +57,36 @@ class login(unittest.TestCase):
         # Valid email and password validation #
         # ************************************* #
 
+        emailid = self.driver.find_element_by_id("Email")
+        emailid.send_keys("block_sulthanbathery@mailinator.com")
+        time.sleep(3)
+        print "Email entered"
+        password = self.driver.find_element_by_id("password")
+        password.send_keys("P@ssw0rd")
+        print "Password entered"
+        time.sleep(3)
+        captcha_text = self.driver.find_element_by_id("CaptchaInputText")
+        captcha_text.send_keys("")
+        print "Enter the text displayed from the captcha image manually"
+        time.sleep(5)
+        WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
+        print "Text found"
+        # self.driver.find_element_by_id("CaptchaInputText").send_keys()
+        time.sleep(4)
+        self.driver.find_element_by_id("btnSubmit").click()
+        self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        print self.driver.title
+        self.driver.find_element_by_xpath("//div[@id='main-menu']/div/ul/li/a/b").click()
+        self.driver.find_element_by_link_text("Users").click()
+        self.driver.find_element_by_link_text("Create New User").click()
+
+
+    def test_02_enter_user_details(self):
+
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
+        time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
         emailid.send_keys("block_sulthanbathery@mailinator.com")
         time.sleep(3)
@@ -80,15 +110,42 @@ class login(unittest.TestCase):
         self.driver.find_element_by_link_text("Users").click()
         self.driver.find_element_by_link_text("Create New User").click()
 
+        # ********************** #
+        # Existing Email id validation #
+        # ********************** #
+
+        self.driver.find_element_by_id("Email").click()
+        time.sleep(1)
+        self.driver.find_element_by_id("Email").send_keys("test123@example.com")
+        time.sleep(1)
+        self.driver.find_element_by_id("FirstName").click()
+        time.sleep(1)
+        self.driver.find_element_by_id("FirstName").send_keys("test test")
+        time.sleep(1)
+        self.driver.find_element_by_id("password").send_keys("P@ssw0rd12")
+        time.sleep(1)
+        self.driver.find_element_by_id("confirmpassword").clear()
+        time.sleep(1)
+        self.driver.find_element_by_id("confirmpassword").send_keys("P@ssw0rd12")
+        time.sleep(1)
+        self.driver.find_element_by_id("ContactPhone").send_keys("9322345532")
+        time.sleep(1)
+        self.driver.find_element_by_id("btnSubmit").click()
+        time.sleep(1)
+        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[1]/div/span").text,
+                      "Email already exists")
 
         # ********************** #
         # Email id validation #
         # ********************** #
 
+        self.driver.find_element_by_id("Email").clear()
+        self.driver.find_element_by_id("FirstName").clear()
         self.driver.find_element_by_id("Email").click()
         time.sleep(1)
         self.driver.find_element_by_id("Email").send_keys("test")
         time.sleep(1)
+        self.driver.find_element_by_id("FirstName").clear()
         self.driver.find_element_by_id("FirstName").click()
         self.assertIn(self.driver.find_element_by_id("Email-error").text,"The Email field is not a valid e-mail address.")
         time.sleep(1)
@@ -104,8 +161,9 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_id("Email-error").text
         self.driver.find_element_by_id("Email").clear()
         time.sleep(1)
-        self.driver.find_element_by_id("Email").send_keys("test123@example.com")
+        self.driver.find_element_by_id("Email").send_keys("test1234@example.com")
         time.sleep(1)
+
 
         # ********************** #
         # FirstName validation #
@@ -153,11 +211,15 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("confirmpassword").send_keys("password123")
         time.sleep(1)
+        #self.driver.find_element_by_id("btnSubmit").click()
+        #time.sleep(3)
+
 
         # ********************** #
         # Phone Number validation #
         # ********************** #
-
+        self.driver.find_element_by_id("ContactPhone").clear()
+        time.sleep(1)
         self.driver.find_element_by_id("ContactPhone").send_keys("ddsad")
         time.sleep(1)
         self.driver.find_element_by_id("Department").click()
@@ -209,7 +271,7 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text
 
 
-    def test_02_check_created_account(self):
+    def test_03_check_created_account(self):
 
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
@@ -226,7 +288,7 @@ class login(unittest.TestCase):
         captcha_text = self.driver.find_element_by_id("CaptchaInputText")
         captcha_text.send_keys("")
         print "Enter the text displayed from the captcha image manually"
-        time.sleep(3)
+        time.sleep(5)
         WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
         print "Text found"
         # self.driver.find_element_by_id("CaptchaInputText").send_keys()
@@ -247,7 +309,7 @@ class login(unittest.TestCase):
         for i in range(1,pages+1):
             print "Verifying in page: ", i
             self.driver.find_element_by_link_text(str(i)).click()
-            if self.driver.find_elements_by_xpath("//*[contains(text(), 'test123@example.com')]"):
+            if self.driver.find_elements_by_xpath("//*[contains(text(), 'test1234@example.com')]"):
                 print "New User Account found"
                 flag = 1
                 break
