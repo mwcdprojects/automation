@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+
 class login(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
@@ -80,7 +81,6 @@ class login(unittest.TestCase):
         self.driver.find_element_by_link_text("Users").click()
         self.driver.find_element_by_link_text("Create New User").click()
 
-    
     def test_02_enter_user_details(self):
 
         self.driver.implicitly_wait(20)
@@ -104,7 +104,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
         self.driver.find_element_by_id("btnSubmit").click()
-        self.assertIn("Approval Queue - MWCD Backoffice" , self.driver.title)
+        self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.driver.find_element_by_xpath("//div[@id='main-menu']/div/ul/li/a/b").click()
         self.driver.find_element_by_link_text("Users").click()
@@ -147,7 +147,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("FirstName").clear()
         self.driver.find_element_by_id("FirstName").click()
-        self.assertIn(self.driver.find_element_by_id("Email-error").text,"The Email field is not a valid e-mail address.")
+        self.assertIn(self.driver.find_element_by_id("Email-error").text,
+                      "The Email field is not a valid e-mail address.")
         time.sleep(1)
         print self.driver.find_element_by_id("Email-error").text
         self.driver.find_element_by_id("Email").click()
@@ -163,7 +164,6 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("Email").send_keys("test12@example.com")
         time.sleep(1)
-
 
         # ********************** #
         # FirstName validation #
@@ -201,7 +201,8 @@ class login(unittest.TestCase):
         self.driver.find_element_by_id("password").send_keys("pass")
         time.sleep(1)
         self.driver.find_element_by_id("confirmpassword").click()
-        self.assertIn(self.driver.find_element_by_id("password-error").text , "The Password must be at least 6 characters long.")
+        self.assertIn(self.driver.find_element_by_id("password-error").text,
+                      "The Password must be at least 6 characters long.")
         print self.driver.find_element_by_id("password-error").text
         self.driver.find_element_by_id("password").clear()
         time.sleep(1)
@@ -211,9 +212,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("confirmpassword").send_keys("password123")
         time.sleep(1)
-        #self.driver.find_element_by_id("btnSubmit").click()
-        #time.sleep(3)
-
+        # self.driver.find_element_by_id("btnSubmit").click()
+        # time.sleep(3)
 
         # ********************** #
         # Phone Number validation #
@@ -224,7 +224,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("Department").click()
         time.sleep(1)
-        self.assertIn(self.driver.find_element_by_id("ContactPhone-error").text , "Enter valid Phone number.")
+        self.assertIn(self.driver.find_element_by_id("ContactPhone-error").text, "Enter valid Phone number.")
         time.sleep(1)
         print self.driver.find_element_by_id("ContactPhone-error").text
         self.driver.find_element_by_id("ContactPhone").clear()
@@ -233,7 +233,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(1)
-        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[3]/div/span").text , " Password must be between 8 and 14 characters and Must be a combination of letters,numbers and special characters ")
+        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[3]/div/span").text,
+                      " Password must be between 8 and 14 characters and Must be a combination of letters,numbers and special characters ")
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[3]/div/span").text
         time.sleep(1)
         self.driver.find_element_by_id("password").click()
@@ -267,9 +268,8 @@ class login(unittest.TestCase):
 
         self.assertIn("List - MWCD Backoffice", self.driver.title)
         print self.driver.title
-        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text , "User Saved Successfully")
+        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text, "User Saved Successfully")
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text
-
 
     def test_03_check_created_account(self):
 
@@ -279,7 +279,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
         emailid.send_keys("block_panamaram@mailinator.com")
-        #time.sleep(3)
+        # time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
         password.send_keys("P@ssw0rd")
@@ -300,7 +300,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul")
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
         values = self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
-        print "values" , type(values.split("\n"))
+        print "values", type(values.split("\n"))
         if len(values.split("\n")) > 1:
             pages = int(values.split("\n")[-2])
         else:
@@ -314,17 +314,17 @@ class login(unittest.TestCase):
                 flag = 1
                 break
             self.driver.find_element_by_link_text(str(i + 1)).click()
-        self.assertEqual(flag , 1, "New user created not found in the User List")
-
+        self.assertEqual(flag, 1, "New user created not found in the User List")
 
     def tearDown(self):
         self.driver.quit()
 
+
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(login)
     testResult = unittest.TextTestRunner(verbosity=2).run(suite)
-    #print "Testresult" , testResult , type(testResult) , dir(testResult)
-    print "fails" , len(testResult.failures)
+    # print "Testresult" , testResult , type(testResult) , dir(testResult)
+    print "fails", len(testResult.failures)
     if len(testResult.failures) > 0:
         sys.exit(1)
 
