@@ -32,7 +32,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("block_kalpetta@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -55,10 +55,10 @@ class login(unittest.TestCase):
         # **************** #
         # Logout validation #
         # **************** #
-
+        time.sleep(3)
         self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
         time.sleep(2)
-        self.driver.find_element_by_id("btnlogout").click()
+        self.driver.find_element_by_xpath("//*[@id=\"btnlogout\"]").click()
         time.sleep(1)
         self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA" , self.driver.title)
         print self.driver.title
