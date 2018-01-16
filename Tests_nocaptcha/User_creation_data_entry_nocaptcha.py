@@ -24,6 +24,7 @@ class login(unittest.TestCase):
     def test_01_login_user(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
+        self.driver.get('chrome://settings/clearBrowserData')
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
 
@@ -51,7 +52,7 @@ class login(unittest.TestCase):
         # ************************************* #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("district_wayanad@mailinator.com")
+        emailid.send_keys("block_mananthavady@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -60,11 +61,20 @@ class login(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
-        self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
+        #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.driver.find_element_by_xpath("//div[@id='main-menu']/div/ul/li/a/b").click()
         self.driver.find_element_by_link_text("Users").click()
         self.driver.find_element_by_link_text("Create New User").click()
+        # Logging out
+
+        self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
+        time.sleep(2)
+        self.driver.find_element_by_id("btnlogout").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
 
     def test_02_enter_user_details(self):
 
@@ -73,7 +83,7 @@ class login(unittest.TestCase):
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("district_wayanad@mailinator.com")
+        emailid.send_keys("block_mananthavady@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -82,7 +92,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
-        self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
+        #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.driver.find_element_by_xpath("//div[@id='main-menu']/div/ul/li/a/b").click()
         self.driver.find_element_by_link_text("Users").click()
@@ -244,10 +254,20 @@ class login(unittest.TestCase):
         # User Saved Page Navigation check and created account validation#
         # ************************************************************** #
 
-        self.assertIn("List - MWCD Backoffice", self.driver.title)
+        #self.assertIn("List - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text, "User Saved Successfully")
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text
+
+        # Logging out
+
+        self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
+        time.sleep(2)
+        self.driver.find_element_by_id("btnlogout").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
 
     def test_03_check_created_account(self):
 
@@ -256,7 +276,7 @@ class login(unittest.TestCase):
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("district_wayanad@mailinator.com")
+        emailid.send_keys("block_mananthavady@mailinator.com")
         # time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -265,7 +285,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
-        self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
+        #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.driver.get("http://mwcd1.fundright.in/backoffice/useraccount/list")
         self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul")
@@ -286,6 +306,16 @@ class login(unittest.TestCase):
                 break
             self.driver.find_element_by_link_text(str(i + 1)).click()
         self.assertEqual(flag, 1, "New user created not found in the User List")
+
+        # Logging out
+
+        self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
+        time.sleep(2)
+        self.driver.find_element_by_id("btnlogout").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
 
     def tearDown(self):
         self.driver.quit()
