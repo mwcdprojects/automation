@@ -24,7 +24,7 @@ class login(unittest.TestCase):
     def test_01_login_user(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
 
         # ************************************* #
@@ -51,7 +51,7 @@ class login(unittest.TestCase):
         # ************************************* #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("district_wayanad@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -59,7 +59,8 @@ class login(unittest.TestCase):
         print "Password entered"
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
-        self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        time.sleep(4)
+        self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.driver.find_element_by_xpath("//div[@id='main-menu']/div/ul/li/a/b").click()
         self.driver.find_element_by_link_text("Users").click()
@@ -69,10 +70,10 @@ class login(unittest.TestCase):
 
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("district_wayanad@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -80,7 +81,8 @@ class login(unittest.TestCase):
         print "Password entered"
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
-        self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        time.sleep(4)
+        self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
         print self.driver.title
         self.driver.find_element_by_xpath("//div[@id='main-menu']/div/ul/li/a/b").click()
         self.driver.find_element_by_link_text("Users").click()
@@ -251,10 +253,10 @@ class login(unittest.TestCase):
 
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("district_wayanad@mailinator.com")
         # time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -262,9 +264,10 @@ class login(unittest.TestCase):
         print "Password entered"
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
-        self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        time.sleep(4)
+        self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
         print self.driver.title
-        self.driver.get("http://mwcd.fundright.in/backoffice/useraccount/list")
+        self.driver.get("http://mwcd1.fundright.in/backoffice/useraccount/list")
         self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul")
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
         values = self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
