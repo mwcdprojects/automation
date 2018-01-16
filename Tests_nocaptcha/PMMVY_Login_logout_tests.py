@@ -50,7 +50,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
         time.sleep(2)
-        self.driver.find_element_by_xpath("//*[@id=\"btnlogout\"]").click()
+        self.driver.find_element_by_xpath("/html/body/nav[2]/div/div/div/ul[5]/li/ul/li[2]/a").click()
         time.sleep(1)
         self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA" , self.driver.title)
         print self.driver.title
