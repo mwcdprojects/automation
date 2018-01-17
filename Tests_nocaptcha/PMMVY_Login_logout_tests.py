@@ -32,7 +32,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_kalpetta@mailinator.com")
+        emailid.send_keys("test_automation2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -41,7 +41,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
-        self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        #self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
         print self.driver.title
 
         # **************** #
@@ -56,8 +56,19 @@ class login(unittest.TestCase):
         print self.driver.title
         print "User Logged out Successfully"
 
-    #def tearDown(self):
-     #   self.driver.quit()
+    def tearDown(self):
+        if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
+            self.driver.quit()
+        else:
+            time.sleep(3)
+            self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
+            time.sleep(2)
+            self.driver.find_element_by_xpath("/html/body/nav[2]/div/div/div/ul[5]/li/ul/li[2]/a").click()
+            time.sleep(1)
+            self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+            print self.driver.title
+            print "User Logged out Successfully"
+            self.driver.quit()
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(login)
