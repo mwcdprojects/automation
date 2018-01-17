@@ -39,6 +39,14 @@ class login(unittest.TestCase):
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        captcha_text = self.driver.find_element_by_id("CaptchaInputText")
+        captcha_text.send_keys("")
+        print "Enter the text displayed from the captcha image manually"
+        time.sleep(5)
+        WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
+        print "Text found"
+        self.driver.find_element_by_id("CaptchaInputText").send_keys()
+        time.sleep(4)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
@@ -50,7 +58,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
         time.sleep(2)
-        self.driver.find_element_by_xpath("/html/body/nav[2]/div/div/div/ul[5]/li/ul/li[2]/a").click()
+        self.driver.find_element_by_id("btnlogout").click()
         time.sleep(1)
         self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA" , self.driver.title)
         print self.driver.title
