@@ -63,13 +63,14 @@ class login(unittest.TestCase):
         # ************************************* #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation2@mailinator.com")
+        emailid.send_keys("block_panamaram@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
         captcha_text = self.driver.find_element_by_id("CaptchaInputText")
         captcha_text.send_keys("")
         print "Enter the text displayed from the captcha image manually"
@@ -78,6 +79,7 @@ class login(unittest.TestCase):
         print "Text found"
         self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
@@ -94,7 +96,7 @@ class login(unittest.TestCase):
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation2@mailinator.com")
+        emailid.send_keys("block_panamaram@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -125,7 +127,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("Email").click()
         time.sleep(1)
-        self.driver.find_element_by_id("Email").send_keys("test_automation2@mailinator.com")
+        self.driver.find_element_by_id("Email").send_keys("block_panamaram@mailinator.com")
         time.sleep(1)
         self.driver.find_element_by_id("FirstName").click()
         time.sleep(1)
@@ -171,7 +173,7 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_id("Email-error").text
         self.driver.find_element_by_id("Email").clear()
         time.sleep(1)
-        self.driver.find_element_by_id("Email").send_keys("testautomation2@example.com")
+        self.driver.find_element_by_id("Email").send_keys("testautomation123@example.com")
         time.sleep(1)
 
         # ********************** #
@@ -304,7 +306,7 @@ class login(unittest.TestCase):
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation2@mailinator.com")
+        emailid.send_keys("block_panamaram@mailinator.com")
         # time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -339,14 +341,14 @@ class login(unittest.TestCase):
         flag = 0
         bodyText = self.driver.find_element_by_tag_name('body').text
         if pages == 1:
-            if "testautomation2@example.com" in bodyText:
+            if "testautomation123@example.com" in bodyText:
                 print "User found!!"
                 flag = 1
         else:
             for i in range(1, pages + 1):
                 print "Verifying in page: ", i
                 bodyText = self.driver.find_element_by_tag_name('body').text
-                if "testautomation2@example.com" in bodyText:
+                if "testautomation123@example.com" in bodyText:
                 #if self.driver.find_elements_by_xpath("//*[contains(text(), 'testautomation2@example.com')]"):
                     print "User found!!"
                     flag = 1
