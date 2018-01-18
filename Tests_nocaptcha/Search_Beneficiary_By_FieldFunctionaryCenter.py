@@ -54,10 +54,10 @@ class login(unittest.TestCase):
         # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
         print self.driver.title
 
-        # ***************************** #
-        # Search Beneficiary validation #
-        # Search By Aadhaar number       #
-        # ***************************** #
+        # *********************************** #
+        # Search Beneficiary validation       #
+        # Search By Field Functionary number  #
+        # *********************************** #
 
         self.driver.find_element_by_xpath("//li[@class='dropdown']/a").click()
         time.sleep(1)

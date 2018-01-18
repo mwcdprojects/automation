@@ -56,7 +56,7 @@ class login(unittest.TestCase):
 
         # ***************************** #
         # Search Beneficiary validation #
-        # Search By Aadhaar number       #
+        # Search By Bank Account number #
         # ***************************** #
 
         self.driver.find_element_by_xpath("//li[@class='dropdown']/a").click()
