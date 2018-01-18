@@ -41,6 +41,7 @@ class login(unittest.TestCase):
         password.send_keys("pass")
         print "Password entered"
         time.sleep(3)
+        """
         captcha_text = self.driver.find_element_by_id("CaptchaInputText")
         captcha_text.send_keys("")
         print "Enter the text displayed from the captcha image manually"
@@ -49,6 +50,7 @@ class login(unittest.TestCase):
         print "Text found"
         self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         self.assertIn(self.driver.find_element_by_xpath("//*[@id=\"form1\"]/div[2]/div/span").text,
                       "The Email field is not a valid e-mail address.")
@@ -99,6 +101,7 @@ class login(unittest.TestCase):
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
         captcha_text = self.driver.find_element_by_id("CaptchaInputText")
         captcha_text.send_keys("")
         print "Enter the text displayed from the captcha image manually"
@@ -107,6 +110,7 @@ class login(unittest.TestCase):
         print "Text found"
         self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
@@ -307,6 +311,7 @@ class login(unittest.TestCase):
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
         captcha_text = self.driver.find_element_by_id("CaptchaInputText")
         captcha_text.send_keys("")
         print "Enter the text displayed from the captcha image manually"
@@ -315,6 +320,7 @@ class login(unittest.TestCase):
         print "Text found"
         self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)

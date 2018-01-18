@@ -39,6 +39,7 @@ class login(unittest.TestCase):
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
         captcha_text = self.driver.find_element_by_id("CaptchaInputText")
         captcha_text.send_keys("")
         print "Enter the text displayed from the captcha image manually"
@@ -47,6 +48,7 @@ class login(unittest.TestCase):
         print "Text found"
         self.driver.find_element_by_id("CaptchaInputText").send_keys()
         time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
