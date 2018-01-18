@@ -63,7 +63,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_link_text("Search Beneficiary").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='Anganvaadi']/option[4]").click()
+        self.driver.find_element_by_xpath("//select[@id='Anganvaadi']/option[6]").click()
         time.sleep(1)
         self.driver.find_element_by_id("btnSearch").click()
         time.sleep(2)
