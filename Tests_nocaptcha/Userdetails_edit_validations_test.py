@@ -69,7 +69,7 @@ class login(unittest.TestCase):
         bodyText = self.driver.find_element_by_tag_name('body').text
 
         if pages == 1:
-            if "newuser@gmail.com" in bodyText:
+            if "testautomation12@example.com" in bodyText:
                 print "User found!!"
                 flag = 1
         else:
@@ -77,7 +77,7 @@ class login(unittest.TestCase):
                 print "Verifying in page: ", i
                 bodyText = self.driver.find_element_by_tag_name('body').text
                 # if self.driver.find_elements_by_xpath("//*[contains(text(), 'testautomation2@example.com')]"):
-                if "newuser@gmail.com" in bodyText:
+                if "testautomation12@example.com" in bodyText:
                     print "User found!!"
                     flag = 1
                     break
@@ -90,6 +90,7 @@ class login(unittest.TestCase):
         # Activate/Deactivate accounts
         # *************************** #
 
+        self.driver.get("http://mwcd1.fundright.in/backoffice/useraccount/list")
         self.driver.find_element_by_xpath("//*[contains(text(), 'Activate')]").click()
         time.sleep(3)
 
