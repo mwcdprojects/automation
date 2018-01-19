@@ -23,7 +23,7 @@ class login(unittest.TestCase):
         self.contactaddr = ""
 
 
-    def test_03_check_created_account(self):
+    def test_01_edit_validations(self):
 
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()

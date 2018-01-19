@@ -21,7 +21,7 @@ class login(unittest.TestCase):
         self.desig = ""
         self.contactaddr = ""
 
-    def test_01_login_logout_user(self):
+    def test_01_Beneficiary_Details_Fieldfunctionary(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")

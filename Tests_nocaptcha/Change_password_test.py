@@ -22,7 +22,7 @@ class login(unittest.TestCase):
         self.contactaddr = ""
         self.bodyText = self.driver.find_element_by_tag_name('body').text
 
-    def test_01_login_logout_user(self):
+    def test_01_change_password(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
