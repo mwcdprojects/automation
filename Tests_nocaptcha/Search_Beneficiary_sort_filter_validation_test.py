@@ -38,7 +38,7 @@ class login(unittest.TestCase):
         print "Details Verified by ", self.driver.find_element_by_id("VerifiedbyUser").get_attribute('value')
         print "Bank is ", self.driver.find_element_by_id("BankName").get_attribute('value')
         print "Bank Account number is ", self.driver.find_element_by_id("BankAccountNo").get_attribute('value')
-    """
+
     def test_01_Search_Beneficiary_sort(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
@@ -313,7 +313,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_link_text("752752").click()
         time.sleep(3)
         self.print_beneficiary_details()
-    """
+
     def test_03_Search_Beneficiary_filter_IDType(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
