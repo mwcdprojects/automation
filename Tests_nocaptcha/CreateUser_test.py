@@ -173,7 +173,7 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_id("Email-error").text
         self.driver.find_element_by_id("Email").clear()
         time.sleep(1)
-        self.driver.find_element_by_id("Email").send_keys("testautomation123@example.com")
+        self.driver.find_element_by_id("Email").send_keys("testautomation11@example.com")
         time.sleep(1)
 
         # ********************** #
@@ -331,7 +331,7 @@ class login(unittest.TestCase):
         try:
             if self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").is_displayed():
                 self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul")
-                print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
+                #print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
                 values = self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
                 print "values", type(values.split("\n"))
                 pages = int(values.split("\n")[-2])
@@ -341,14 +341,14 @@ class login(unittest.TestCase):
         flag = 0
         bodyText = self.driver.find_element_by_tag_name('body').text
         if pages == 1:
-            if "testautomation123@example.com" in bodyText:
+            if "testautomation11@example.com" in bodyText:
                 print "User found!!"
                 flag = 1
         else:
             for i in range(1, pages + 1):
                 print "Verifying in page: ", i
                 bodyText = self.driver.find_element_by_tag_name('body').text
-                if "testautomation123@example.com" in bodyText:
+                if "testautomation11@example.com" in bodyText:
                 #if self.driver.find_elements_by_xpath("//*[contains(text(), 'testautomation2@example.com')]"):
                     print "User found!!"
                     flag = 1
