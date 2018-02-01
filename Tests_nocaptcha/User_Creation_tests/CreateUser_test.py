@@ -41,6 +41,16 @@ class login(unittest.TestCase):
         password.send_keys("pass")
         print "Password entered"
         time.sleep(3)
+        """
+        captcha_text = self.driver.find_element_by_id("CaptchaInputText")
+        captcha_text.send_keys("")
+        print "Enter the text displayed from the captcha image manually"
+        time.sleep(5)
+        WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
+        print "Text found"
+        self.driver.find_element_by_id("CaptchaInputText").send_keys()
+        time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         self.assertIn(self.driver.find_element_by_xpath("//*[@id=\"form1\"]/div[2]/div/span").text,
                       "The Email field is not a valid e-mail address.")
@@ -53,13 +63,23 @@ class login(unittest.TestCase):
         # ************************************* #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation2@mailinator.com")
+        emailid.send_keys("block_panamaram@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
+        captcha_text = self.driver.find_element_by_id("CaptchaInputText")
+        captcha_text.send_keys("")
+        print "Enter the text displayed from the captcha image manually"
+        time.sleep(5)
+        WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
+        print "Text found"
+        self.driver.find_element_by_id("CaptchaInputText").send_keys()
+        time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
@@ -76,13 +96,23 @@ class login(unittest.TestCase):
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation2@mailinator.com")
+        emailid.send_keys("block_panamaram@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
+        captcha_text = self.driver.find_element_by_id("CaptchaInputText")
+        captcha_text.send_keys("")
+        print "Enter the text displayed from the captcha image manually"
+        time.sleep(5)
+        WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
+        print "Text found"
+        self.driver.find_element_by_id("CaptchaInputText").send_keys()
+        time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
@@ -97,7 +127,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("Email").click()
         time.sleep(1)
-        self.driver.find_element_by_id("Email").send_keys("test_automation2@mailinator.com")
+        self.driver.find_element_by_id("Email").send_keys("block_panamaram@mailinator.com")
         time.sleep(1)
         self.driver.find_element_by_id("FirstName").click()
         time.sleep(1)
@@ -113,8 +143,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(1)
-        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[1]/div/form/div[6]/div/div/span").text , "Select a Permission")
-        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[1]/div/form/div[1]/div/span").text,
+        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[1]/div/span").text,
                       "Email already exists")
 
         # ********************** #
@@ -144,7 +173,7 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_id("Email-error").text
         self.driver.find_element_by_id("Email").clear()
         time.sleep(1)
-        self.driver.find_element_by_id("Email").send_keys("testautomation@example.com")
+        self.driver.find_element_by_id("Email").send_keys("testautomation101 @example.com")
         time.sleep(1)
 
         # ********************** #
@@ -197,17 +226,17 @@ class login(unittest.TestCase):
         # self.driver.find_element_by_id("btnSubmit").click()
         # time.sleep(3)
 
-
+        
         # ********************** #
         # Permissions validation #
         # ********************** #
 
-        self.driver.find_element_by_xpath("//*[@id=\"PermCanDoDataEntry\"]").click()
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//*[@id=\"PermCanDoReporting\"]").click()
-        time.sleep(1)
+        #self.driver.find_element_by_xpath("//*[@id=\"PermCanDoDataEntry\"]").click()
+        #time.sleep(1)
+        #self.driver.find_element_by_xpath("//*[@id=\"PermCanDoReporting\"]").click()
+        #time.sleep(1)
 
-
+        
         # ********************** #
         # Phone Number validation #
         # ********************** #
@@ -226,9 +255,9 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(1)
-        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[1]/div/form/div[3]/div/span").text,
+        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[3]/div/span").text,
                       " Password must be between 8 and 14 characters and Must be a combination of letters,numbers and special characters ")
-        print self.driver.find_element_by_xpath("/html/body/div[1]/div/form/div[3]/div/span").text
+        print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[3]/div/span").text
         time.sleep(1)
         self.driver.find_element_by_id("password").click()
         time.sleep(1)
@@ -265,8 +294,8 @@ class login(unittest.TestCase):
 
         #self.assertIn("List - MWCD Backoffice", self.driver.title)
         print self.driver.title
-        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[1]/div/form/p").text, "User Saved Successfully")
-        print self.driver.find_element_by_xpath("/html/body/div[1]/div/form/p").text
+        self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text, "User Saved Successfully")
+        print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text
 
 
 
@@ -277,13 +306,23 @@ class login(unittest.TestCase):
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation2@mailinator.com")
+        emailid.send_keys("block_panamaram@mailinator.com")
         # time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
         password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
+        """
+        captcha_text = self.driver.find_element_by_id("CaptchaInputText")
+        captcha_text.send_keys("")
+        print "Enter the text displayed from the captcha image manually"
+        time.sleep(5)
+        WebDriverWait(self.driver, 900).until(EC.visibility_of_element_located((By.ID, "CaptchaInputText")))
+        print "Text found"
+        self.driver.find_element_by_id("CaptchaInputText").send_keys()
+        time.sleep(4)
+        """
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         #self.assertIn("Block Field Functionary Mapping - MWCD Backoffice", self.driver.title)
@@ -292,7 +331,7 @@ class login(unittest.TestCase):
         try:
             if self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").is_displayed():
                 self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul")
-                print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
+                #print self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
                 values = self.driver.find_element_by_xpath("/html/body/div[2]/div/form/div[2]/div/div/div/div/div/ul").text
                 print "values", type(values.split("\n"))
                 pages = int(values.split("\n")[-2])
@@ -300,14 +339,22 @@ class login(unittest.TestCase):
                 pages = 1
         print pages
         flag = 0
-        for i in range(1, pages + 1):
-            print "Verifying in page: ", i
-            if self.driver.find_elements_by_xpath("//*[contains(text(), 'testautomation@example.com')]"):
-                print "New User Account found"
+        bodyText = self.driver.find_element_by_tag_name('body').text
+        if pages == 1:
+            if "testautomation101@example.com" in bodyText:
+                print "User found!!"
                 flag = 1
-                break
-            self.driver.find_element_by_link_text(str(i + 1)).click()
-        self.assertEqual(flag, 1, "New user created not found in the User List")
+        else:
+            for i in range(1, pages + 1):
+                print "Verifying in page: ", i
+                bodyText = self.driver.find_element_by_tag_name('body').text
+                if "testautomation101@example.com" in bodyText:
+                #if self.driver.find_elements_by_xpath("//*[contains(text(), 'testautomation2@example.com')]"):
+                    print "User found!!"
+                    flag = 1
+                    break
+                self.driver.find_element_by_link_text(str(i + 1)).click()
+        self.assertEqual(flag, 1, "User not found in the User List")
 
 
 

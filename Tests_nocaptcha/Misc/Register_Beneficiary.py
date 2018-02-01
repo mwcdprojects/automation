@@ -88,7 +88,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
-        password.send_keys("P@ssw0rd1")
+        password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
 
@@ -110,16 +110,16 @@ class login(unittest.TestCase):
         self.assertIn(self.driver.find_element_by_id("spnAadhar").text , 'The entered Aadhaar Number is invalid. Please enter again')
         time.sleep(1)
         self.driver.find_element_by_id("txtAadhar").clear()
-        self.driver.find_element_by_id("txtAadhar").send_keys("523834271501")
+        self.driver.find_element_by_id("txtAadhar").send_keys("472320554838")
         time.sleep(1)
         self.driver.find_element_by_id("BenAadhaarCheck").click()
         self.driver.switch_to_active_element()
         self.assertTrue(self.driver.find_element_by_xpath("//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable ui-resizable']").is_displayed())
         time.sleep(1)
-        self.driver.find_element_by_id("btnEditRegistration").click()
-        time.sleep(1)
-        print self.driver.title
-        time.sleep(1)
+        #self.driver.find_element_by_id("btnEditRegistration").click()
+        #time.sleep(1)
+        #print self.driver.title
+        #time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='drpAnganvaadi']/option[3]").click()
         time.sleep(1)
         self.driver.find_element_by_id("btnVerify").click()
