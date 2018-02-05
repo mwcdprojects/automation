@@ -22,7 +22,7 @@ class login(unittest.TestCase):
         self.desig = ""
         self.contactaddr = ""
 
-    """
+    
     def test_01_Register_Beneficiary(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
@@ -38,7 +38,7 @@ class login(unittest.TestCase):
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
-        password.send_keys("P@ssw0rd1")
+        password.send_keys("P@ssw0rd")
         print "Password entered"
         time.sleep(3)
 
@@ -71,7 +71,7 @@ class login(unittest.TestCase):
         errors = self.driver.find_elements_by_xpath("//span[@class='field-validation-error']")
         for each in errors:
             print each.text
-    """
+
     def test_02_Register_Beneficiary_Aadhaar_Number_check(self):
 
         self.driver.implicitly_wait(20)
@@ -148,6 +148,51 @@ class login(unittest.TestCase):
         # Close the dialog box
 
         self.driver.find_element_by_xpath("//button[@class='ui-dialog-titlebar-close']").click()
+
+    # ***************************************************** #
+    # Beneficiary already enrolled in old MBP scheme (IGMSY)
+    # ***************************************************** #
+
+    def test_03_Beneficiary_already_enrolled(self):
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        time.sleep(3)
+
+        # **************** #
+        # Login validation #
+        # **************** #
+
+        emailid = self.driver.find_element_by_id("Email")
+        emailid.send_keys("testautomation12@example.com")
+        time.sleep(3)
+        print "Email entered"
+        password = self.driver.find_element_by_id("password")
+        password.send_keys("P@ssw0rd")
+        print "Password entered"
+        time.sleep(3)
+        self.driver.find_element_by_id("btnSubmit").click()
+        time.sleep(4)
+        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        print self.driver.title
+        self.driver.find_element_by_xpath("//li[@class='dropdown']/a").click()
+        time.sleep(1)
+        self.driver.find_element_by_link_text("New Beneficiary").click()
+        time.sleep(2)
+
+        # Default value should be "No" #
+
+        values = self.driver.find_elements_by_xpath("//input[@id='MBPSchemeValue']")
+        print values[1].get_attribute('value')
+        self.assertTrue(values[1].get_attribute('value') , 0)
+
+        # "Yes" option should display three options - validation #
+
+        values[0].click()
+        time.sleep(1)
+        data = self.driver.find_elements_by_xpath("//input[@id='MBPInstalmentRecieved']")
+        for each in data:
+            print each.get_attribute('value')
 
 
     def tearDown(self):
