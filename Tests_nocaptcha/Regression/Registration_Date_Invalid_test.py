@@ -1,8 +1,9 @@
 #!C:\Python27\python.exe
 
 """
-Testcase :Enter the registration date as 1/1/2017 and submit the form
-Expected Result: The system should accept the beneficiary submission with the date 1/1/2017
+Testcase :Enter the registration date as < 1/1/2017 and submit the form
+Expected Result: System should not allow to submit the form by throwing an error stating:
+"Registration Date must not be less than January 1, 2017. Please enter the correct date"
 
 """
 import sys
@@ -88,7 +89,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
@@ -100,16 +101,16 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Ganga K")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Shraddha H")
         time.sleep(1)
-        self.driver.find_element_by_id("txtAadhar").send_keys("285318309928")
+        self.driver.find_element_by_id("txtAadhar").send_keys("288527379777")
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAadhaarCheck']").click()
         time.sleep(2)
 
-        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Gautham K")
+        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Suhas H")
         time.sleep(1)
-        self.driver.find_element_by_id("txtFAadhar").send_keys("534691189018")
+        self.driver.find_element_by_id("txtFAadhar").send_keys("362295756846")
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAadhaarCheck']").click()
         time.sleep(2)
@@ -117,31 +118,31 @@ class login(unittest.TestCase):
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAadharStatus']").text , "Aadhaar is allowed for Registration")
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAadharStatus']").text, "Aadhaar is allowed for Registration")
 
-        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9989009899")
+        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9980776512")
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='Category']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7867')
+        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7866')
         self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[11]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[9]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[3]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='dpicker3']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[1]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[10]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[1]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[7]").click()
         time.sleep(1)
 
-        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('787')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('786')
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('8th Cross')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('87th Cross')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine3']").send_keys('Bull Temple Road')
         time.sleep(1)
@@ -160,9 +161,9 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667790")
+        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667789")
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Ganga K")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Shraddha H")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -173,7 +174,8 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text, "Registration Date must not be less than January 1, 2017. Please enter the correct date")
+        #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
 
 
     def tearDown(self):
