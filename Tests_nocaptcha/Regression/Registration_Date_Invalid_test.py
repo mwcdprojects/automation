@@ -57,7 +57,7 @@ class login(unittest.TestCase):
         time.sleep(3)
 
 
-    def test_02_add_a_beneficiary_valid_regdate(self):
+    def test_02_add_a_beneficiary_invalid_regdate(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
@@ -183,9 +183,9 @@ class login(unittest.TestCase):
             self.driver.quit()
         else:
             time.sleep(3)
-            self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
+            self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
             time.sleep(2)
-            self.driver.find_element_by_xpath("/html/body/nav[2]/div/div/div/ul[5]/li/ul/li[2]/a").click()
+            self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
             time.sleep(1)
             self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
             print self.driver.title
