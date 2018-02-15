@@ -1,8 +1,9 @@
 #!C:\Python27\python.exe
 
 """
-Testcase :Enter the MCP Card date greater than LMP date and submit the form
-Expected Result: System should allow to submit the form
+Testcase :Enter the Registration date lesser than MCP date and submit the form
+Expected Result: System should not allow to submit the form by throwing an error stating:
+" Date of Reg of MCP card must not exceed the Beneficiary Registration Date. Please enter the correct date""
 
 """
 import sys
@@ -88,9 +89,9 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
         time.sleep(1)
         Aadhaar_avaialbilty_data = self.driver.find_elements_by_xpath("//input[@id='BeneficiaryAadharExistVal']")
         time.sleep(1)
@@ -100,9 +101,9 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[3]").click()
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys("VID99008")
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys("987010")
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
@@ -110,25 +111,25 @@ class login(unittest.TestCase):
                         "Id Proof Number is allowed for Registration")
 
 
-        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[3]").click()
+        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys("VID99009")
+        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys("987010")
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAlternateIdCheck']").click()
         time.sleep(2)
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
-        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Garima Thakur")
+        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Harini M")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Girish Thakur")
+        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Harsha M")
         time.sleep(1)
 
 
-        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9989009899")
+        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9980776515")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='Category']/option[4]").click()
+        self.driver.find_element_by_xpath("//select[@id='Category']/option[3]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7878')
+        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7168')
         self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
@@ -146,9 +147,9 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
 
-        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('788')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('791')
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('5th Cross')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('10th Cross')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine3']").send_keys('Bull Temple Road')
         time.sleep(1)
@@ -165,9 +166,9 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667791")
+        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667794")
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Garima Thakur")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Harini M")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -178,7 +179,9 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text,
+                        "Date of Reg of MCP card must not exceed the Beneficiary Registration Date. Please enter the correct date")
 
 
     def tearDown(self):

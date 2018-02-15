@@ -1,7 +1,7 @@
 #!C:\Python27\python.exe
 
 """
-Testcase :Enter the MCP Card date greater than LMP date and submit the form
+Testcase :Enter the Registration date greater than or equal to MCP date and submit the form
 Expected Result: System should allow to submit the form
 
 """
@@ -100,9 +100,9 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[3]").click()
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys("VID99008")
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys("987009")
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
@@ -110,25 +110,25 @@ class login(unittest.TestCase):
                         "Id Proof Number is allowed for Registration")
 
 
-        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[3]").click()
+        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys("VID99009")
+        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys("987009")
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAlternateIdCheck']").click()
         time.sleep(2)
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
-        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Garima Thakur")
+        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Jyothi Kundar")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Girish Thakur")
+        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Jitendra Kundar")
         time.sleep(1)
 
 
-        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9989009899")
+        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9989009999")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='Category']/option[4]").click()
+        self.driver.find_element_by_xpath("//select[@id='Category']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7878')
+        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7167')
         self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
@@ -146,9 +146,9 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
 
-        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('788')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('790')
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('5th Cross')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('9th Cross')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine3']").send_keys('Bull Temple Road')
         time.sleep(1)
@@ -165,9 +165,9 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667791")
+        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667793")
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Garima Thakur")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Jyothi Kundar")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
