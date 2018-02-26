@@ -2,7 +2,7 @@
 
 """
 Testcase :Enter the Registration details with No.of children > 1
-Expected Result: Not Eligible criteria
+Expected Result: Ineligible for the scheme
 
 """
 import sys
@@ -28,7 +28,7 @@ class login(unittest.TestCase):
         self.desig = ""
         self.contactaddr = ""
 
-    def test_01_Register_Beneficiary(self):
+    def test_01(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
@@ -56,7 +56,7 @@ class login(unittest.TestCase):
         time.sleep(3)
 
 
-    def test_02_add_a_beneficiary_children_lt_1(self):
+    def test_02(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
@@ -108,6 +108,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
+        print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
 
@@ -118,6 +119,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAlternateIdCheck']").click()
         time.sleep(2)
+        print self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
         self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Shanti")
@@ -165,6 +167,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='ifscButton1']").click()
         time.sleep(2)
+        print self.driver.find_element_by_xpath("//label[@id='lblStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667701")
@@ -180,6 +183,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
+        print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
         self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text , "The beneficiary will not be eligible to apply for any benefits under the scheme as the number of living children exceeds 0")
 
 
