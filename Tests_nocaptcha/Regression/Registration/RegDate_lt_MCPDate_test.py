@@ -29,7 +29,7 @@ class login(unittest.TestCase):
         self.desig = ""
         self.contactaddr = ""
 
-    def test_01_Register_Beneficiary(self):
+    def test_01(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
@@ -57,7 +57,7 @@ class login(unittest.TestCase):
         time.sleep(3)
 
 
-    def test_02_add_a_beneficiary_valid_MCPCarddate_LMPDate(self):
+    def test_02(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
@@ -107,6 +107,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
+        print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
 
@@ -117,6 +118,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAlternateIdCheck']").click()
         time.sleep(2)
+        print self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
         self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Harini M")
@@ -164,6 +166,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='ifscButton1']").click()
         time.sleep(2)
+        print self.driver.find_element_by_xpath("//label[@id='lblStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667794")
@@ -180,6 +183,7 @@ class login(unittest.TestCase):
         time.sleep(5)
         self.driver.implicitly_wait(20)
         #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        print self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text
         self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text,
                         "Date of Reg of MCP card must not exceed the Beneficiary Registration Date. Please enter the correct date")
 
