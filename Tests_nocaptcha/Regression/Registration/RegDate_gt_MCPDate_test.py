@@ -39,35 +39,8 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.ration_card = ''.join(random.choice(string.digits) for i in range(7))
 
+
     def test_01(self):
-        self.driver.implicitly_wait(20)
-        self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
-        time.sleep(3)
-
-        # **************** #
-        # Login validation #
-        # **************** #
-
-        emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
-        time.sleep(3)
-        print "Email entered"
-        password = self.driver.find_element_by_id("password")
-        password.send_keys("P@ssw0rd")
-        print "Password entered"
-        time.sleep(3)
-
-        self.driver.find_element_by_id("btnSubmit").click()
-        time.sleep(4)
-        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
-        print self.driver.title
-
-        self.driver.find_element_by_id("btnNewbeneficiary").click()
-        time.sleep(3)
-
-
-    def test_02(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
