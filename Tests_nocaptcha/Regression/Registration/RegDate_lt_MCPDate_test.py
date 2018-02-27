@@ -15,6 +15,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import random
+import string
 
 
 class login(unittest.TestCase):
@@ -28,6 +30,15 @@ class login(unittest.TestCase):
         self.dept = ""
         self.desig = ""
         self.contactaddr = ""
+        self.a = string.ascii_letters + string.digits
+        self.id1 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.id2 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.accountno = ''.join(random.choice(string.digits) for i in range(18))
+        self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.ration_card = ''.join(random.choice(string.digits) for i in range(7))
 
     def test_01(self):
         self.driver.implicitly_wait(20)
@@ -105,7 +116,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys("987010")
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.ration_card)
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
@@ -116,7 +127,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys("987010")
+        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys(self.ration_card)
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAlternateIdCheck']").click()
         time.sleep(2)
@@ -133,7 +144,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='Category']/option[3]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7168')
+        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys(self.health_id)
         self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
@@ -175,7 +186,7 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//label[@id='lblStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667794")
+        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Harini M")
         time.sleep(2)

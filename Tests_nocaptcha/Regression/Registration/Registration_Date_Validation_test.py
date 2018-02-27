@@ -14,11 +14,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import random
+import string
 
 
 class login(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+
         self.email = ""
         self.name = ""
         self.pwd = ""
@@ -27,36 +29,18 @@ class login(unittest.TestCase):
         self.dept = ""
         self.desig = ""
         self.contactaddr = ""
-
+        self.a = string.ascii_letters + string.digits
+        self.id1 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.id2 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.accountno = ''.join(random.choice(string.digits) for i in range(18))
+        self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.aadhaar1 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel here')
+        self.aadhaar2 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel here')
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
     def test_01(self):
-        self.driver.implicitly_wait(20)
-        self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
-        time.sleep(3)
-
-        # **************** #
-        # Login validation #
-        # **************** #
-
-        emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
-        time.sleep(3)
-        print "Email entered"
-        password = self.driver.find_element_by_id("password")
-        password.send_keys("P@ssw0rd")
-        print "Password entered"
-        time.sleep(3)
-
-        self.driver.find_element_by_id("btnSubmit").click()
-        time.sleep(4)
-        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
-        print self.driver.title
-
-        self.driver.find_element_by_id("btnNewbeneficiary").click()
-        time.sleep(3)
-
-
-    def test_02(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
@@ -104,14 +88,14 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Ganga K")
         time.sleep(1)
-        self.driver.find_element_by_id("txtAadhar").send_keys("285318309928")
+        self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='BenAadhaarCheck']").click()
         time.sleep(2)
 
         self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Gautham K")
         time.sleep(1)
-        self.driver.find_element_by_id("txtFAadhar").send_keys("534691189018")
+        self.driver.find_element_by_id("txtFAadhar").send_keys(self.aadhaar2)
         time.sleep(1)
         self.driver.find_element_by_xpath("//a[@id='HusbandAadhaarCheck']").click()
         time.sleep(2)
@@ -124,7 +108,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='Category']/option[4]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys('HID7867')
+        self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys(self.health_id)
         self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
@@ -157,8 +141,6 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='drpAnganvaadi']/option[4]").click()
         time.sleep(4)
-        self.driver.find_element_by_xpath("//input[@id='AreaLocalitySector']").send_keys("Kerela")
-        time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='Pincode']").send_keys('670645')
         time.sleep(1)
         self.driver.find_element_by_id("BankIFSCCode").send_keys("SBIN0005099")
@@ -168,7 +150,7 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//label[@id='lblStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys("50998977667790")
+        self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Ganga K")
         time.sleep(2)
