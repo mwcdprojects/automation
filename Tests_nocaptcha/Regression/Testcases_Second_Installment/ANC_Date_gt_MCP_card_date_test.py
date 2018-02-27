@@ -92,6 +92,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[2]").click()
         time.sleep(1)
+        print "Registration Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(
+            "value")
         Aadhaar_avaialbilty_data = self.driver.find_elements_by_xpath("//input[@id='BeneficiaryAadharExistVal']")
         time.sleep(1)
         # print Aadhaar_avaialbilty_data[1].get_attribute('value')
@@ -137,6 +139,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
         time.sleep(1)
+        print "Last Menstrual Period (LMP) Date => ", self.driver.find_element_by_xpath(
+            "//input[@id='dpicker2']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='dpicker3']").click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
@@ -145,7 +149,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
         time.sleep(1)
-
+        print "Date of Reg of MCP card at AWC/ Subcenter => ", self.driver.find_element_by_xpath(
+            "//input[@id='dpicker3']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('110')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('2nd Main')
@@ -192,6 +197,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[3]").click()
         time.sleep(1)
+        print "Date of Claim at the Field Functionary Centre => ", self.driver.find_element_by_xpath(
+            "//input[@id='dpicker']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='dpicker1']").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
@@ -200,6 +207,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[7]").click()
         time.sleep(1)
+        print "ANC Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='btnSave']").click()
         time.sleep(2)
         self.driver.switch_to_alert().accept()
