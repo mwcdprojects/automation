@@ -91,6 +91,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[1]").click()
         time.sleep(1)
+        print "Registration Date => " , self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute("value")
         self.driver.find_elements_by_xpath("//input[@id='MBPSchemeValue']")[0].click()
         time.sleep(2)
         self.driver.find_elements_by_xpath("//input[@id='MBPInstalmentRecieved']")[2].click()
@@ -148,7 +149,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
-
+        print "Date of Reg of MCP card at AWC/ Subcenter => " , self.driver.find_element_by_xpath("//input[@id='dpicker3']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('802')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('16th Cross')
