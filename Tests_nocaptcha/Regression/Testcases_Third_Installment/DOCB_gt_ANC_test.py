@@ -1,9 +1,8 @@
 #!C:\Python27\python.exe
 
 """
-Testcase : Aadhaar number not provided
-Expected Result:Ineligible for the third instalment. "Aadhar of both Husband and Beneficiary are mandatory.
-Third Instalment will be processed only after both the aadhar's are linked to the System"
+Testcase :Date of Child Birth > ANC
+Expected Result: Should accept the form
 
 """
 import sys
@@ -37,8 +36,8 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        #self.aadhaar1 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel')
-        #self.aadhaar2 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel')
+        self.aadhaar1 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel')
+        self.aadhaar2 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel')
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
 
@@ -83,35 +82,32 @@ class login(unittest.TestCase):
         Aadhaar_avaialbilty_data = self.driver.find_elements_by_xpath("//input[@id='BeneficiaryAadharExistVal']")
         time.sleep(1)
         # print Aadhaar_avaialbilty_data[1].get_attribute('value')
-        Aadhaar_avaialbilty_data[1].click()
+        Aadhaar_avaialbilty_data[0].click()
         time.sleep(1)
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
-        Aadhar_husband_availability[1].click()
+        Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[7]").click()
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Noor")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.id1)
+        self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
         time.sleep(1)
-        self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
+        self.driver.find_element_by_xpath("//a[@id='BenAadhaarCheck']").click()
         time.sleep(2)
-        print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
-        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text,
-                        "Id Proof Number is allowed for Registration")
 
-        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[7]").click()
+        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Naushad")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys(self.id2)
+        self.driver.find_element_by_id("txtFAadhar").send_keys(self.aadhaar2)
         time.sleep(1)
-        self.driver.find_element_by_xpath("//a[@id='HusbandAlternateIdCheck']").click()
+        self.driver.find_element_by_xpath("//a[@id='HusbandAadhaarCheck']").click()
         time.sleep(2)
-        print self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text
-        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
-                        "Id Proof Number is allowed for Registration")
-        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Sridevi")
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Srikanth")
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9990000017")
+        print self.driver.find_element_by_xpath("//label[@id='lblBenAadharStatus']").text
+        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAadharStatus']").text,
+                        "Aadhaar is allowed for Registration")
+        print self.driver.find_element_by_xpath("//label[@id='lblHusbandAadharStatus']").text
+        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAadharStatus']").text,
+                        "Aadhaar is allowed for Registration")
+
+        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9990000016")
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='Category']/option[4]").click()
         time.sleep(1)
@@ -136,7 +132,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         print "Date of Reg of MCP card at AWC/ Subcenter => ", self.driver.find_element_by_xpath(
             "//input[@id='dpicker3']").get_attribute("value")
-        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('111')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('110')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('2nd Main')
         time.sleep(1)
@@ -158,7 +154,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Sridevi")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Noor")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -223,7 +219,9 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
         time.sleep(1)
         print "Date of Child Birth => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute("value")
-        self.driver.find_elements_by_xpath("//input[@id='GovtInstituteValue']")[1].click()
+        self.driver.find_elements_by_xpath("//input[@id='GovtInstituteValue']")[0].click()
+        time.sleep(1)
+        self.driver.find_element_by_id("DeliveryInstitute").send_keys("Matru Health Care")
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='drpNoofChildren']/option[2]").click()
         time.sleep(1)
@@ -242,11 +240,10 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//input[@id='btnSave']").click()
         time.sleep(2)
         self.driver.switch_to_alert().accept()
-        time.sleep(13)
-        msgs = self.driver.find_elements_by_tag_name("h5")
-        for each in msgs:
-            print each.text
-        #self.assertTrue(msgs[1].text," Aadhar of both Husband and Beneficiary are mandatory. Third Instalment will be processed only after both the aadhar's are linked to the System ")
+        time.sleep(3)
+        print self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text,
+                        "Third Instalment Saved Successfully")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

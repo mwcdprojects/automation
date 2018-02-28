@@ -235,7 +235,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[5]").click()
         time.sleep(1)
-        print "Date of Child Birth => ", self.driver.find_element_by_xpath("//input[@id='dpicker2']").get_attribute(
+        print "Date of completion of all vaccinations  => ", self.driver.find_element_by_xpath("//input[@id='dpicker2']").get_attribute(
             "value")
         self.driver.find_element_by_xpath("//input[@id='btnSave']").click()
         time.sleep(2)
