@@ -14,13 +14,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import random
 import string
+import random
+import verhoeff
+
 
 
 class login(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
         self.email = ""
         self.name = ""
         self.pwd = ""
@@ -29,14 +30,18 @@ class login(unittest.TestCase):
         self.dept = ""
         self.desig = ""
         self.contactaddr = ""
-        self.a = string.ascii_letters+string.digits
-        self.id1 = ''.join(random.choice(string.ascii_letters) for i in range(4))+''.join(random.choice(string.digits) for i in range(4))
-        self.id2 = ''.join(random.choice(string.ascii_letters) for i in range(4))+''.join(random.choice(string.digits) for i in range(4))
+        self.a = string.ascii_letters + string.digits
+        self.id1 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
+        self.id2 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
+            random.choice(string.digits) for i in range(4))
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
-    
 
     def test_01(self):
         self.driver.implicitly_wait(20)
