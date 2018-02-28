@@ -17,6 +17,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import string
 import random
+import verhoeff
+
 
 
 class login(unittest.TestCase):
@@ -37,10 +39,9 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        # self.aadhaar1 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel')
-        # self.aadhaar2 = raw_input('Enter the Aadhaar number from the Aadhaar generating excel')
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
-
 
 
     def test_01(self):
