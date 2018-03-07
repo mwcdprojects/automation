@@ -1,8 +1,8 @@
 #!C:\Python27\python.exe
 
 """
-Testcase :Enter the Registration details with LMP > Apr 2016
-Expected Result: System should allow to submit the form - Eligible criteria
+Testcase :IGMSY : First and Second Instalment
+Expected Result: Ineligible for the scheme.
 
 """
 import sys
@@ -75,21 +75,25 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[5]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[1]/td[2]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[1]").click()
         time.sleep(1)
         print "Registration Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(
             "value")
+        self.driver.find_elements_by_xpath("//input[@id='MBPSchemeValue']")[0].click()
+        time.sleep(2)
+        self.driver.find_elements_by_xpath("//input[@id='MBPInstalmentRecieved']")[1].click()
+        time.sleep(1)
         Aadhaar_avaialbilty_data = self.driver.find_elements_by_xpath("//input[@id='BeneficiaryAadharExistVal']")
         time.sleep(1)
-        #print Aadhaar_avaialbilty_data[1].get_attribute('value')
+        # print Aadhaar_avaialbilty_data[1].get_attribute('value')
         Aadhaar_avaialbilty_data[1].click()
         time.sleep(1)
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[6]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.id1)
         time.sleep(1)
@@ -99,8 +103,7 @@ class login(unittest.TestCase):
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
 
-
-        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[6]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtFatherAlternateNumber']").send_keys(self.id2)
         time.sleep(1)
@@ -109,40 +112,37 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
-        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Harshithaa")
+        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Zuanaa")
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Hemanthh")
+        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Zain")
         time.sleep(1)
 
-
-        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9989009819")
+        self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9990000011")
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@id='Category']/option[4]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='HealthId']").send_keys(self.health_id)
-        self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
-        time.sleep(2)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[5]").click()
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[1]/td[6]").click()
-        time.sleep(1)
-        print "Last Menstrual Period (LMP) Date => ", self.driver.find_element_by_xpath(
-            "//input[@id='dpicker2']").get_attribute("value")
+        # self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
+        # time.sleep(2)
+        # self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        # time.sleep(1)
+        # self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[1]").click()
+        # time.sleep(1)
+        # self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[1]").click()
+        # time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='dpicker3']").click()
         time.sleep(2)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[4]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
         print "Date of Reg of MCP card at AWC/ Subcenter => ", self.driver.find_element_by_xpath(
             "//input[@id='dpicker3']").get_attribute("value")
-        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('11')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('16')
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('1st Main')
+        self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('2nd Main')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine3']").send_keys('Bull Temple Road')
         time.sleep(1)
@@ -158,11 +158,11 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//a[@id='ifscButton1']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblStatus']").text
-        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
+        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text, "Valid IFSC Code")
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Harshithaa")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Zuanaa")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -173,9 +173,13 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
-
+        # self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        #print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
+        #self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text,
+         #               "Instalment Data not exists")
+        print self.driver.find_element_by_xpath("//div[@class='row']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='row']/h5").text,
+                        "Beneficiary can apply only for Third instalment as the beneficiary has already recieved First Instalment under old MBP(IGMSY) scheme")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
