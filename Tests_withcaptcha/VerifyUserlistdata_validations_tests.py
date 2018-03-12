@@ -14,6 +14,7 @@ import time
 class login(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.src = self.driver.page_source
         self.email = ""
         self.name = ""
         self.pwd = ""
@@ -60,13 +61,20 @@ class login(unittest.TestCase):
                 pages = 1
         print pages
         flag = 0
-        for i in range(1, pages + 1):
-            print "Verifying in page: ", i
-            if self.driver.find_elements_by_xpath("//*[contains(text(), 'dataentry_kalpetta@mailinator.com')]"):
+        bodyText = self.driver.find_element_by_tag_name('body').text
+
+        if pages == 1:
+            if "dataentry_kalpetta@mailinator.com" in bodyText:
                 print "User found!!"
                 flag = 1
-                break
-            self.driver.find_element_by_link_text(str(i + 1)).click()
+        else:
+            for i in range(1, pages + 1):
+                print "Verifying in page: ", i
+                if self.driver.find_elements_by_xpath("//*[contains(text(), 'dataentry_kalpetta@mailinator.com')]"):
+                    print "User found!!"
+                    flag = 1
+                    break
+                self.driver.find_element_by_link_text(str(i + 1)).click()
         self.assertEqual(flag, 1, "User not found in the User List")
 
         # *********************************** #
@@ -103,14 +111,42 @@ class login(unittest.TestCase):
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(2)
         self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/div/div[1]/form/div[2]/div/div/span").text,"The password and confirmation password do not match")
-        self.driver.find_element_by_id("newPassword").send_keys("P@ssw0rd")
-        self.driver.find_element_by_id("confirmPassword").send_keys("P@ssw0rd")
+        self.driver.find_element_by_id("newPassword").send_keys("P@ssw0rd2")
+        self.driver.find_element_by_id("confirmPassword").send_keys("P@ssw0rd2")
         self.driver.find_element_by_id("btnSubmit").click()
+        #self.driver.find_element_by_xpath("/html/body/div[2]/div/div/div[1]/form/div[3]/div/input[2]").click()
         time.sleep(3)
         self.assertIn(self.driver.find_element_by_xpath("/html/body/div[2]/div/form/p").text , "Password Changed Successfully")
 
+        # ******************************** #
+        # User Account - Edit user Details #
+        # ******************************** #
+        self.driver.find_element_by_link_text("Edit").click()
+        time.sleep(1)
+        #self.driver.find_element_by_id("Email").clear()
+        #time.sleep(1)
+        #self.driver.find_element_by_id("Email").send_keys("dataentry2@kalpetta.com")
+        #time.sleep(1)
+        self.driver.find_element_by_id("FirstName").clear()
+        self.driver.find_element_by_id("FirstName").send_keys("Alok")
+        time.sleep(1)
+        self.driver.find_element_by_id("btnSubmit").click()
+
+
+
     def tearDown(self):
-        self.driver.quit()
+        if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
+            self.driver.quit()
+        else:
+            time.sleep(3)
+            self.driver.find_element_by_xpath("//*[@id=\"main-menu\"]/div/ul[5]/li/a").click()
+            time.sleep(2)
+            self.driver.find_element_by_xpath("/html/body/nav[2]/div/div/div/ul[5]/li/ul/li[2]/a").click()
+            time.sleep(1)
+            self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+            print self.driver.title
+            print "User Logged out Successfully"
+            self.driver.quit()
 
 
 if __name__ == "__main__":
