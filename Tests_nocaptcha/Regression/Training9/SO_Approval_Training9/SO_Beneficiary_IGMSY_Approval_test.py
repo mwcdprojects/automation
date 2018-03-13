@@ -4,9 +4,7 @@
 Testcase : IGMSY Approval queue consists only IGMSY related forms (Registration and instalments).
 Note ; IGMSY - None cases will not appear in the IGMSY approval queue
  test_01 :Register a beneficiary with valid Aadhaar card. Register for all three Instalments.
- test_02_FirstInstalment:  Approval of First Instalment by SO Officer.
- test_03_Second_Instalment: Approval of Second Instalment by SO Officer.
- test_04_Third_Instalment: Approval of Third Instalment by SO Officer.
+ test_02_FirstInstalment:  Approval SO Officer.
 
 """
 import sys
@@ -57,7 +55,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation_so@mailinator.com")
+        emailid.send_keys("test_automation123@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -187,7 +185,7 @@ class login(unittest.TestCase):
     def test_02_IGMSY_Instalment_Approval(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
         time.sleep(3)
 
         # **************** #
@@ -195,7 +193,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("test_automation_so@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")

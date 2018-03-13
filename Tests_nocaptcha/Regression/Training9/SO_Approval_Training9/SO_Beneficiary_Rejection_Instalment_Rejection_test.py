@@ -62,7 +62,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
+        emailid.send_keys("test_automation123@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -258,7 +258,7 @@ class login(unittest.TestCase):
     def test_02_FirstInstalment_Rejection(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
         time.sleep(3)
 
         # **************** #
@@ -266,7 +266,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("test_automation_so@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -322,7 +322,7 @@ class login(unittest.TestCase):
     def test_03_First_Second_Third_Registration(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
         time.sleep(3)
 
         # **************** #
@@ -330,7 +330,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
+        emailid.send_keys("test_automation123@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -530,7 +530,7 @@ class login(unittest.TestCase):
     def test_04_FirstInstalment_Approval(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
         time.sleep(3)
 
         # **************** #
@@ -538,7 +538,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("test_automation_so@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -585,7 +585,7 @@ class login(unittest.TestCase):
     def test_05_SecondInstallmet_Rejection(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
         time.sleep(3)
 
         # **************** #
@@ -593,7 +593,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("test_automation_so@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -650,7 +650,7 @@ class login(unittest.TestCase):
     def test_06_ThirdInstallmet_Rejection(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
         time.sleep(3)
 
         # **************** #
@@ -658,7 +658,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("test_automation_so@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
