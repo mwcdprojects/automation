@@ -581,9 +581,9 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_link_text(self.aadhaar1).click()
         time.sleep(2)
-        # self.assertEqual(
-        #     self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
-        #     "Payment details verified")
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
+            "Payment details verified")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)
