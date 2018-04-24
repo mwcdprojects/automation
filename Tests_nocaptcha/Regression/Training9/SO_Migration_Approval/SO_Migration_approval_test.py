@@ -342,7 +342,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
         print len(self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']"))
-        self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']")[1].click()
+        self.driver.find_element_by_xpath("//a[@class='btn btn-info approve-btns']").click()
         self.driver.switch_to_active_element()
         time.sleep(1)
         buttons = self.driver.find_elements_by_xpath("//div[@class='ui-dialog-buttonset']/button")
