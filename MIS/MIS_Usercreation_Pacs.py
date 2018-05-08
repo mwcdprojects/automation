@@ -19,6 +19,7 @@ class login(unittest.TestCase):
         self.lname = ""
         self.emailaddr = ""
         self.mobile = "'"
+        self.k = 1
 
     def test_01_login_user(self):
         self.driver.implicitly_wait(20)
@@ -30,13 +31,18 @@ class login(unittest.TestCase):
         # ************************************* #
         # Login Details #
         # ************************************* #
-        for i in range(1, 11):
+        for i in range(1, 51):
+            if self.k < 10:
+                print "Value of k is " , self.k
+            else:
+                self.k = 1
+
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("tlkuser19@gmail.com")
+            emailid.send_keys("tlkuser28@gmail.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("Password")
-            password.send_keys("tlkuser19")
+            password.send_keys("tlkuser28")
             print "Password entered"
             time.sleep(3)
 
@@ -70,7 +76,8 @@ class login(unittest.TestCase):
 
             self.driver.find_element_by_id("Mob").send_keys(self.mobile)
             print "Mobile Number is " , self.mobile
-            self.driver.find_element_by_xpath("//select[@id='createUser_AreaId']/option["+str(i+1)+"]").click()
+            self.driver.find_element_by_xpath("//select[@id='createUser_AreaId']/option["+str(self.k+1)+"]").click()
+            self.k = self.k + 1
             self.driver.find_element_by_id("Remarks").send_keys("Test Remarks")
             time.sleep(2)
             self.driver.find_element_by_id("ctl00_ContentPlaceHolder1_btnSave").click()
@@ -142,11 +149,11 @@ class login(unittest.TestCase):
             # Approval
 
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("tlkuser19@gmail.com")
+            emailid.send_keys("tlkuser28@gmail.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("Password")
-            password.send_keys("tlkuser19")
+            password.send_keys("tlkuser28")
             print "Password entered"
             time.sleep(3)
 
