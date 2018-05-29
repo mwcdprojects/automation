@@ -7,9 +7,11 @@ Testcase :Beneficiary form will get approved and will be sent for UIDAI verifica
  test_02_FirstInstalment:  Approval of First Instalment by SO Officer.
  test_03_Second_Instalment: Approval of Second Instalment by SO Officer.
  test_04_Third_Instalment: Approval of Third Instalment by SO Officer.
+ test_05_Scheduler: Functional flow from SO Approval to PFMS Accepted for claims.
 
 """
 import sys
+import os
 import collections
 import unittest
 from selenium import webdriver
@@ -21,6 +23,8 @@ import time
 import string
 import random
 import verhoeff
+import mysql.connector
+import datetime
 
 
 
@@ -45,7 +49,7 @@ class login(unittest.TestCase):
         self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
         self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
-
+        self.tomorrow = datetime.date.today() + datetime.timedelta(days=2)
 
 
     def test_01(self):
@@ -94,7 +98,7 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Girija")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Renuka Devi")
         time.sleep(1)
         print "Beneficiary Name is ", self.driver.find_element_by_id("txtNameAsInAadhar").get_attribute("value")
         self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
@@ -103,7 +107,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//a[@id='BenAadhaarCheck']").click()
         time.sleep(2)
 
-        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Shyam")
+        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Shankar")
         time.sleep(1)
         self.driver.find_element_by_id("txtFAadhar").send_keys(self.aadhaar2)
         time.sleep(1)
@@ -163,7 +167,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Girija")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Renuka Devi")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -181,7 +185,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[8]").click()
         time.sleep(1)
@@ -211,7 +215,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -253,19 +257,21 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text
         self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text,
                         "Third Instalment Saved Successfully")
+        self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
+        time.sleep(2)
 
-    def test_02_FirstInstalment(self):
-        self.driver.implicitly_wait(20)
-        self.driver.maximize_window()
-        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
-        time.sleep(3)
-
-        # **************** #
-        # Login validation #
-        # **************** #
+        # ************************* #
+        # First Instalment Approval #
+        # ************************* #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("test_automationso2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -289,7 +295,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Girija")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Renuka Devi")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -309,18 +315,97 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(2)
 
-    def test_03_SecondInstallmet(self):
-        self.driver.implicitly_wait(20)
-        self.driver.maximize_window()
-        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
-        time.sleep(3)
+        self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
+        time.sleep(2)
 
-        # **************** #
-        # Login validation #
-        # **************** #
+
+
+        # ********************************** #
+        # DB update for Aadhaar verification #
+        # ********************************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("dataentry_testautomation@mailinator.com")
+        time.sleep(3)
+        print "Email entered"
+        password = self.driver.find_element_by_id("password")
+        password.send_keys("P@ssw0rd1")
+        print "Password entered"
+        time.sleep(3)
+        self.driver.find_element_by_id("btnSubmit").click()
+        time.sleep(4)
+        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        print self.driver.title
+        time.sleep(1)
+
+        conn = mysql.connector.connect(host='bl-mbp-mysql.southindia.cloudapp.azure.com', port=3306, user='user',
+                                       password='HWf6frqGoR61', db='MWCD_TEST')
+        a = conn.cursor()
+
+        a.execute('select * from TbBeneficiary where  AadharNo = '+self.aadhaar1+ ';')
+        ben_id = a.fetchall()[0][0]
+        print ben_id
+        a.execute('select * from TbFatherDetails where BeneficiaryId = ' + str(ben_id) + ';')
+        father_aadhaar =  a.fetchall()[0][4]
+        print father_aadhaar
+
+        a.execute('update TbBeneficiary set IsAadhaarAuthenticated = 1 where BeneficiaryId = ' +str(ben_id)+ ';')
+        conn.commit()
+        a.execute('update TbFatherDetails set IsAadhaarAuthenticated = 1 where BeneficiaryId = ' +str(ben_id)+ ';')
+        conn.commit()
+
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[2]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.aadhaar1)
+        time.sleep(2)
+        self.driver.find_element_by_id("btnSearch").click()
+        time.sleep(2)
+        self.driver.find_element_by_link_text(self.aadhaar1).click()
+        time.sleep(2)
+        self.driver.find_element_by_id("imgAadharValid")
+        time.sleep(1)
+        self.assertEqual(self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text , "Both Beneficiary and Husband Aadhaar verified")
+
+        self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
+        time.sleep(2)
+
+        # Batch Approval from UI
+
+        # Payment Details verification
+        time.sleep(5)
+        pfms_code = "PFMS" + str(ben_id)
+        pfms_status = "ACCP"
+        print "Updating db"
+        conn = mysql.connector.connect(host='bl-mbp-mysql.southindia.cloudapp.azure.com', port=3306, user='user',
+                                       password='HWf6frqGoR61', db='MWCD_TEST')
+        a = conn.cursor()
+        a.execute("""update TbBeneficiary set PFMSBeneficiaryCode = %s where BeneficiaryId = %s """,
+                  (pfms_code, str(ben_id)))
+        conn.commit()
+        a.execute("""update TbBeneficiary set PFMSStatus = %s where BeneficiaryId = %s""", (pfms_status, ben_id))
+        conn.commit()
+        print "updated db"
+        time.sleep(5)
+
+        # Run the Scheduler
+        os.system("D:\Scheduler\Scheduler\MWCDScheduler")
+        time.sleep(20)
+
+
+        emailid = self.driver.find_element_by_id("Email")
+        emailid.send_keys("state1_kerala@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -328,97 +413,205 @@ class login(unittest.TestCase):
         print "Password entered"
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
-        time.sleep(4)
+        time.sleep(1)
         # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
         print self.driver.title
+        time.sleep(1)
+        self.driver.find_element_by_id("paymentVerify").click()
         time.sleep(3)
-
-        # Beneficiary Approval
-
-        self.driver.find_element_by_partial_link_text("INSTALMENT APPROVAL").click()
-        time.sleep(2)
-        #print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
-        #print self.driver.find_element_by_xpath("//div[@class='tab-content']")
-        #print self.driver.find_element_by_id("Beneficiary")
-        frame = self.driver.find_element_by_xpath("//iframe[@id='approvalQueueGrid1']")
-        self.driver.switch_to_frame(frame)
-        self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Girija")
-        time.sleep(1)
-        self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
-        time.sleep(2)
-        print len(self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']"))
-        self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']")[1].click()
         self.driver.switch_to_active_element()
+        self.driver.find_element_by_xpath("//div[@class='ui-dialog-buttonset']/button[1]").click()
+        time.sleep(2)
+        self.driver.switch_to_alert().accept()
+        time.sleep(4)
+        self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
         time.sleep(1)
-        buttons = self.driver.find_elements_by_xpath("//div[@class='ui-dialog-buttonset']/button")
-        print len(buttons)
-        for each in buttons:
-            print each.text
-        buttons[1].click()
-        time.sleep(2)
-        print self.driver.switch_to_alert().text
-        self.driver.switch_to_alert().accept()
-        time.sleep(2)
-        print self.driver.switch_to_alert().text
-        self.driver.switch_to_alert().accept()
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
         time.sleep(2)
 
-    def test_04_ThirdInstallmet(self):
-        self.driver.implicitly_wait(20)
-        self.driver.maximize_window()
-        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
-        time.sleep(3)
+        # Update claims
 
-        # **************** #
-        # Login validation #
-        # **************** #
+
+        a.execute("""update TbBeneficiaryClaim set PFMSStatusDate = %s where BeneficiaryId = %s and ClaimId = 1""" ,
+                  (self.tomorrow , str(ben_id)))
+        conn.commit()
+        # Login and verify the message "Payment Details Verified" in web page
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("dataentry_testautomation@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
-        password.send_keys("P@ssw0rd")
+        password.send_keys("P@ssw0rd1")
         print "Password entered"
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
         time.sleep(4)
         # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
         print self.driver.title
+        time.sleep(1)
+
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[2]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.aadhaar1)
+        time.sleep(2)
+        self.driver.find_element_by_id("btnSearch").click()
+        time.sleep(2)
+        self.driver.find_element_by_link_text(self.aadhaar1).click()
+        time.sleep(2)
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
+            "Approved by Sanctioning Officer")
+        time.sleep(4)
+        self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
+        time.sleep(2)
+
+        a.execute("""update TbBeneficiaryClaim set PFMSStatus = %s where BeneficiaryId = %s and ClaimId = 1""",
+                  (pfms_status, str(ben_id)))
+        conn.commit()
+        emailid = self.driver.find_element_by_id("Email")
+        emailid.send_keys("dataentry_testautomation@mailinator.com")
         time.sleep(3)
-
-        # Beneficiary Approval
-
-        self.driver.find_element_by_partial_link_text("INSTALMENT APPROVAL").click()
-        time.sleep(2)
-        #print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
-        #print self.driver.find_element_by_xpath("//div[@class='tab-content']")
-        #print self.driver.find_element_by_id("Beneficiary")
-        frame = self.driver.find_element_by_xpath("//iframe[@id='approvalQueueGrid1']")
-        self.driver.switch_to_frame(frame)
-        self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
+        print "Email entered"
+        password = self.driver.find_element_by_id("password")
+        password.send_keys("P@ssw0rd1")
+        print "Password entered"
+        time.sleep(3)
+        self.driver.find_element_by_id("btnSubmit").click()
+        time.sleep(4)
+        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        print self.driver.title
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Girija")
+
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.aadhaar1)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//a[@class='btn btn-info approve-btns']").click()
+        self.driver.find_element_by_id("btnSearch").click()
+        time.sleep(2)
+        self.driver.find_element_by_link_text(self.aadhaar1).click()
+        time.sleep(2)
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
+            "Approved by Sanctioning Officer")
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td[5]/label").text,
+            "PFMS Accepted")
+        # self.assertEqual(
+        #     self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[3]/td[5]/label").text,
+        #     "Paid")
+        # self.assertEqual(
+        #     self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[4]/td[5]/label").text,
+        #     "Paid")
+        time.sleep(4)
+        self.driver.find_element_by_xpath("//a[@id='ancReRegistration']").click()
+        time.sleep(2)
+        print self.driver.switch_to_alert().text
+        self.driver.switch_to_alert().accept()
+        time.sleep(2)
+
         self.driver.switch_to_active_element()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        buttons = self.driver.find_elements_by_xpath("//div[@class='ui-dialog-buttonset']/button")
-        print len(buttons)
-        for each in buttons:
-            print each.text
-        buttons[1].click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[52]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[4]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
+        time.sleep(1)
+
+        self.driver.find_element_by_xpath("//input[@id='dpicker2']").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[52]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
+        time.sleep(1)
+
+
+        self.driver.find_element_by_xpath("//input[@id='NoOfLiveChildren']").send_keys("1")
         time.sleep(2)
-        print self.driver.switch_to_alert().text
-        self.driver.switch_to_alert().accept()
+
+        self.driver.find_element_by_xpath("//input[@id='dpicker1']").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[52]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[1]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
+        time.sleep(1)
+
+        self.driver.find_element_by_xpath("//input[@id='ReasonForReApplying']").send_keys("test")
         time.sleep(2)
-        print self.driver.switch_to_alert().text
-        self.driver.switch_to_alert().accept()
+
+        self.driver.find_element_by_xpath("//div[@class = 'ui-dialog-buttonset']/button[2]").click()
         time.sleep(2)
+
+        #print self.driver.find_element_by_xpath("//label[@id='ui-dialog-buttonset']").text
+
+        self.driver.find_element_by_xpath("//input[@id='NoOfLiveChildren']").clear()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//input[@id='NoOfLiveChildren']").send_keys("0")
+        time.sleep(2)
+
+        self.driver.find_element_by_xpath("//div[@class = 'ui-dialog-buttonset']/button[2]").click()
+        time.sleep(2)
+
+        self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()
+        time.sleep(1)
+        self.assertIn("PRADHAN MANTRI MATRU VANDANA YOJANA", self.driver.title)
+        print self.driver.title
+        print "User Logged out Successfully"
+        time.sleep(2)
+
+        emailid = self.driver.find_element_by_id("Email")
+        emailid.send_keys("dataentry_testautomation@mailinator.com")
+        time.sleep(3)
+        print "Email entered"
+        password = self.driver.find_element_by_id("password")
+        password.send_keys("P@ssw0rd1")
+        print "Password entered"
+        time.sleep(3)
+        self.driver.find_element_by_id("btnSubmit").click()
+        time.sleep(4)
+        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        print self.driver.title
+        time.sleep(1)
+
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[2]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.aadhaar1)
+        time.sleep(2)
+        self.driver.find_element_by_id("btnSearch").click()
+        time.sleep(2)
+        self.driver.find_element_by_link_text(self.aadhaar1).click()
+        time.sleep(2)
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
+            "Approved by Sanctioning Officer")
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td[5]/label").text,
+            "PFMS Accepted")
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[3]/td[5]/label").text,
+            "Claim Closed")
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[4]/td[5]/label").text,
+            "Claim Closed")
 
 
     def tearDown(self):
