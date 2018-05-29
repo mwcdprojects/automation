@@ -259,7 +259,7 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         time.sleep(2)
-        buttons[4].click()
+        buttons[5].click()
         time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
