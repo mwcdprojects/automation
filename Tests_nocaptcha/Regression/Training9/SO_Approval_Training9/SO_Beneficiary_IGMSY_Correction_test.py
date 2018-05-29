@@ -263,7 +263,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        time.sleep(2)
+        time.sleep(3)
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
