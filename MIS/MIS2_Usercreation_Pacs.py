@@ -19,6 +19,7 @@ class login(unittest.TestCase):
         self.lname = ""
         self.emailaddr = ""
         self.mobile = "'"
+        self.k = 1
 
     def test_01_login_user(self):
         self.driver.implicitly_wait(20)
@@ -30,13 +31,18 @@ class login(unittest.TestCase):
         # ************************************* #
         # Login Details #
         # ************************************* #
-        for i in range(1, 3):
+        for i in range(1, 11):
+            if self.k < 10:
+                print "Value of k is " , self.k
+            else:
+                self.k = 1
+
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("tlkuser28@gmail.com")
+            emailid.send_keys("demotlkuser@gmail.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("Password")
-            password.send_keys("tlkuser28")
+            password.send_keys("demotlkuser")
             print "Password entered"
             time.sleep(3)
 
@@ -70,7 +76,8 @@ class login(unittest.TestCase):
 
             self.driver.find_element_by_id("Mob").send_keys(self.mobile)
             print "Mobile Number is " , self.mobile
-            self.driver.find_element_by_xpath("//select[@id='createUser_AreaId']/option["+str(i+1)+"]").click()
+            self.driver.find_element_by_xpath("//select[@id='createUser_AreaId']/option["+str(self.k+1)+"]").click()
+            self.k = self.k + 1
             self.driver.find_element_by_id("Remarks").send_keys("Test Remarks")
             time.sleep(2)
             self.driver.find_element_by_id("ctl00_ContentPlaceHolder1_btnSave").click()
@@ -139,14 +146,14 @@ class login(unittest.TestCase):
             self.driver.find_element_by_id("btnlogoff").click()
             print "User Logged out Successfully"
 
-            # Rejection
+            # Approval
 
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("tlkuser28@gmail.com")
+            emailid.send_keys("demotlkuser@gmail.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("Password")
-            password.send_keys("tlkuser28")
+            password.send_keys("demotlkuser")
             print "Password entered"
             time.sleep(3)
 
@@ -155,12 +162,11 @@ class login(unittest.TestCase):
             time.sleep(2)
             self.driver.find_element_by_id("tab1").click()
             time.sleep(2)
-            self.driver.find_element_by_xpath("//div[@id='gridview1']/div/table/tbody/tr/td[25]").click()
+            self.driver.find_element_by_xpath("//div[@id='gridview1']/div/table/tbody/tr/td[24]").click()
             time.sleep(3)
-            self.driver.find_element_by_xpath("//div[@id='rejectModal']/div/div/div/section/div/textarea").send_keys("Test Reject")
-            time.sleep(2)
-            self.driver.find_element_by_xpath("//div[@id='rejectModal']/div/div/div/section/div/button").click()
+            self.driver.find_element_by_xpath("//div[@id='Prompt_YesNo']/div/div/div/section/div/button").click()
             time.sleep(3)
+
             self.driver.find_element_by_xpath("//a[@class='nbar dropdown-toggle']").click()
             time.sleep(2)
             self.driver.find_element_by_id("btnlogoff").click()

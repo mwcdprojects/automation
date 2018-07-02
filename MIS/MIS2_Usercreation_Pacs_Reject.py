@@ -30,13 +30,13 @@ class login(unittest.TestCase):
         # ************************************* #
         # Login Details #
         # ************************************* #
-        for i in range(1, 3):
+        for i in range(1, 12):
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("tlkuser28@gmail.com")
+            emailid.send_keys("demotlkuser@gmail.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("Password")
-            password.send_keys("tlkuser28")
+            password.send_keys("demotlkuser")
             print "Password entered"
             time.sleep(3)
 
@@ -142,11 +142,11 @@ class login(unittest.TestCase):
             # Rejection
 
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("tlkuser28@gmail.com")
+            emailid.send_keys("demotlkuser@gmail.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("Password")
-            password.send_keys("tlkuser28")
+            password.send_keys("demotlkuser")
             print "Password entered"
             time.sleep(3)
 
