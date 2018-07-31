@@ -1,4 +1,8 @@
 #!C:\Python27\python.exe
+
+"""
+Creating the Initiative KPIs by the user with the Initiative read & write access
+"""
 import sys
 import unittest
 from selenium import webdriver
@@ -19,7 +23,7 @@ class login(unittest.TestCase):
         self.confirm_pwd = ""
         self.mobilenumber = ""
 
-    def test_01_Project_Creation(self):
+    def test_01_Initiative_KPIs(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://sunidhi-test.fundright.in/backoffice/useraccount/Login")

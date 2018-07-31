@@ -1,4 +1,7 @@
 #!C:\Python27\python.exe
+"""
+Project creation by the user with Read & Write access to the Initiative.
+"""
 import sys
 import unittest
 from selenium import webdriver
