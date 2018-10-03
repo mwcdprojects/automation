@@ -71,7 +71,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation123@mailinator.com")
+        emailid.send_keys("testautomation123@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -244,6 +244,19 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_id("DeliveryInstitute").send_keys("Matru Health Care")
         time.sleep(1)
+        self.driver.find_elements_by_xpath("//input[@id='IsJSYReceived']")[0].click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//input[@id='JSYAmount']").send_keys("1500")
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//input[@id='dpicker3']").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[10]").click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
+        time.sleep(1)
+
         self.driver.find_element_by_xpath("//select[@id='drpNoofChildren']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='maleId0']").click()
