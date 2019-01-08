@@ -749,9 +749,9 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_link_text(self.aadhaar1).click()
         time.sleep(2)
-        # self.assertEqual(
-        #     self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
-        #     "Payment details verified")
+        self.assertEqual(
+            self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
+            "Approved by Sanctioning Officer")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)
@@ -792,13 +792,13 @@ class login(unittest.TestCase):
             "Approved by Sanctioning Officer")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[3]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[4]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)

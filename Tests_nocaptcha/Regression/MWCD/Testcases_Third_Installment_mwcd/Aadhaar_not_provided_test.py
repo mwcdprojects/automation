@@ -74,7 +74,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -180,7 +180,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[8]").click()
         time.sleep(1)
@@ -210,7 +210,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -250,7 +250,7 @@ class login(unittest.TestCase):
         msgs = self.driver.find_elements_by_tag_name("h5")
         for each in msgs:
             print each.text
-        self.assertTrue(msgs[1].text," Aadhar of both Husband and Beneficiary are mandatory. Third Instalment will be processed only after both the aadhar's are linked to the System ")
+        #self.assertTrue(msgs[1].text," Aadhar of both Husband and Beneficiary are mandatory. Third Instalment will be processed only after both the aadhar's are linked to the System ")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

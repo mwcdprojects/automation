@@ -804,13 +804,13 @@ class login(unittest.TestCase):
             "Approved by Sanctioning Officer")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[3]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[4]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)

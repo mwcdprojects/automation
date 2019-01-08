@@ -47,8 +47,24 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar1", self.aadhaar1
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar2", self.aadhaar2
+            else:
+                break
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
         self.tomorrow = datetime.date.today() + datetime.timedelta(days=2)
 
@@ -792,13 +808,13 @@ class login(unittest.TestCase):
             "Approved by Sanctioning Officer")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[3]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[4]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)

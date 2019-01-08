@@ -60,7 +60,7 @@ class VerhoeffChecksum():
 
 if __name__ == '__main__':
     v = VerhoeffChecksum()
-    aadhaar = ''.join(random.choice(string.digits) for i in range(11))
+    aadhaar = ''.join(random.choice(string.digits) for i in range(1,12))
     print v.generateVerhoeff(aadhaar)
     # Some tests and also usage examples
     assert v.calcsum('75872') == 2

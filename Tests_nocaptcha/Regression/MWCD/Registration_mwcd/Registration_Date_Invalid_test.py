@@ -68,10 +68,11 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
+        time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
-        time.sleep(1)
+
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
         print "Registration Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(

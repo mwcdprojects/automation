@@ -82,7 +82,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -185,7 +185,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[8]").click()
         time.sleep(1)
@@ -215,7 +215,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -583,7 +583,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text,
-            "Payment details verified")
+            "Approved by Sanctioning Officer")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)
@@ -624,13 +624,13 @@ class login(unittest.TestCase):
             "Approved by Sanctioning Officer")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[3]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         self.assertEqual(
             self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[4]/td[5]/label").text,
-            "Paid")
+            "PFMS Accepted")
         time.sleep(4)
         self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
         time.sleep(2)
