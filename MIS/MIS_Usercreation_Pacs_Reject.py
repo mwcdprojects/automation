@@ -30,7 +30,7 @@ class login(unittest.TestCase):
         # ************************************* #
         # Login Details #
         # ************************************* #
-        for i in range(1, 11):
+        for i in range(1, 3):
             emailid = self.driver.find_element_by_id("Email")
             emailid.send_keys("tlkuser28@gmail.com")
             time.sleep(3)
