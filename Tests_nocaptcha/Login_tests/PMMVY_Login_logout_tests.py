@@ -10,6 +10,7 @@ import time
 
 
 class login(unittest.TestCase):
+
     def setUp(self):
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
         self.email = ""
@@ -34,6 +35,7 @@ class login(unittest.TestCase):
         emailid = self.driver.find_element_by_id("Email")
         emailid.send_keys("block_panamaram@mailinator.com")
         time.sleep(3)
+        self.driver.fin
         print "Email entered"
         password = self.driver.find_element_by_id("password")
         password.send_keys("P@ssw0rd")

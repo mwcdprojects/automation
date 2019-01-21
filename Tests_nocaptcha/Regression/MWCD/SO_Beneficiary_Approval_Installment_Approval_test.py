@@ -100,7 +100,7 @@ class login(unittest.TestCase):
 
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
+        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
 
         # **************** #
@@ -110,11 +110,11 @@ class login(unittest.TestCase):
         print "Hus Aadhaar ids" , self.hus_aadhaar
         for i in range(5):
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("bulk_registration@mailinator.com")
+            emailid.send_keys("dataentry_testautomation@mailinator.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("password")
-            password.send_keys("P@ssw0rd")
+            password.send_keys("P@ssw0rd1")
             print "Password entered"
             time.sleep(3)
             self.driver.find_element_by_id("btnSubmit").click()
@@ -228,6 +228,7 @@ class login(unittest.TestCase):
             print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
             self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text,
                             " The beneficiary application form is sent for approval")
+            """
             installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
             installments[1].click()
             time.sleep(2)
@@ -308,6 +309,7 @@ class login(unittest.TestCase):
             print self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text
             self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text,
                             "Third Instalment Saved Successfully")
+            """
             self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
             time.sleep(2)
             self.driver.find_element_by_xpath("//a[@id='btnlogout']").click()

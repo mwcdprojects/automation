@@ -247,6 +247,8 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text
         self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text,
                         "Third Instalment date should not be less than Second Instalment date. Please enter the correct date")
+    def test_02(self):
+        pass
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

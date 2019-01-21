@@ -68,9 +68,9 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)

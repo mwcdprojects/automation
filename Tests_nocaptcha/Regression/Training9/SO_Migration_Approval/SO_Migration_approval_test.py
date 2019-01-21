@@ -59,6 +59,7 @@ class login(unittest.TestCase):
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
     def test_01(self):
+
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://training9.pmmvy-cas.nic.in/BackOffice/UserAccount/Login")
@@ -69,7 +70,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation1234@example.com")
+        emailid.send_keys("testautomation123@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -198,9 +199,9 @@ class login(unittest.TestCase):
         # **************** #
         # Login validation #
         # **************** #
-
+        
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation_so1@mailnator.com")
+        emailid.send_keys("test_automation_so1@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -249,7 +250,7 @@ class login(unittest.TestCase):
         time.sleep(1)
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation123@mailinator.com")
+        emailid.send_keys("testautomation123@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -313,7 +314,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("test_automation_so@mailinator.com")
+        emailid.send_keys("test_automation_so1@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")

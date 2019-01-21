@@ -11,3 +11,4 @@ sql = 'SHOW TABLES;'
 sql1 = "SELECT count(*) from BankBranch;"
 a.execute(sql1)
 print a.fetchall()
+

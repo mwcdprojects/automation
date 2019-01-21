@@ -68,9 +68,9 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[5]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[6]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
@@ -163,8 +163,8 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text
-        self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text, "Registration Date must not be less than January 1, 2017. Please enter the correct date")
+        #print self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text
+        #self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text, "Registration Date must not be less than January 1, 2017. Please enter the correct date")
         #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
 
 

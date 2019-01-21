@@ -45,13 +45,30 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar1", self.aadhaar1
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar2", self.aadhaar2
+            else:
+                break
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
 
 
     def test_01_First_Second_Third_Instalments_Registration(self):
+
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
@@ -81,7 +98,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -97,7 +114,7 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Vamsi")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Girijaaa")
         time.sleep(1)
         print "Beneficiary Name is ", self.driver.find_element_by_id("txtNameAsInAadhar").get_attribute("value")
         self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
@@ -106,7 +123,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//a[@id='BenAadhaarCheck']").click()
         time.sleep(2)
 
-        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Surya")
+        self.driver.find_element_by_id("txtFNameAsInAadhaar").send_keys("Shyamm")
         time.sleep(1)
         self.driver.find_element_by_id("txtFAadhar").send_keys(self.aadhaar2)
         time.sleep(1)
@@ -166,7 +183,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Vamsi")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Girijaaa")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -178,13 +195,14 @@ class login(unittest.TestCase):
         time.sleep(5)
         self.driver.implicitly_wait(20)
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text,
+                        " The beneficiary application form is sent for approval")
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         installments[1].click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[8]").click()
         time.sleep(1)
@@ -206,7 +224,8 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(1)
         print self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text , "Second Instalment Saved Successfully")
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text,
+                        "Second Instalment Saved Successfully")
         time.sleep(2)
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         time.sleep(2)
@@ -214,7 +233,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -230,7 +249,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
         time.sleep(1)
-        print "Date of Child Birth => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute("value")
+        print "Date of Child Birth => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(
+            "value")
         self.driver.find_elements_by_xpath("//input[@id='GovtInstituteValue']")[0].click()
         time.sleep(1)
         self.driver.find_element_by_id("DeliveryInstitute").send_keys("Asha Health Care")
@@ -247,7 +267,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[7]").click()
         time.sleep(1)
-        print "Date of completion of all vaccinations  => ", self.driver.find_element_by_xpath("//input[@id='dpicker2']").get_attribute(
+        print "Date of completion of all vaccinations  => ", self.driver.find_element_by_xpath(
+            "//input[@id='dpicker2']").get_attribute(
             "value")
         self.driver.find_element_by_xpath("//input[@id='btnSave']").click()
         time.sleep(2)
@@ -268,7 +289,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("testautomation_so2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -292,7 +313,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Vamsi")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Girijaaa")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -316,9 +337,9 @@ class login(unittest.TestCase):
         buttons = self.driver.find_elements_by_xpath("//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
         for each in buttons:
             print each.text
-        time.sleep(2)
-        buttons[4].click()
-        time.sleep(2)
+        time.sleep(5)
+        buttons[5].click()
+        time.sleep(5)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
@@ -353,7 +374,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -369,7 +390,7 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Rajni")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Rajjni")
         time.sleep(1)
         print "Beneficiary Name is ",self.driver.find_element_by_id("txtNameAsInAadhar").get_attribute("value")
         self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
@@ -438,7 +459,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Rajni")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Rajjni")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -457,7 +478,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[8]").click()
         time.sleep(1)
@@ -488,7 +509,7 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[7]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -526,9 +547,9 @@ class login(unittest.TestCase):
             "//input[@id='dpicker2']").get_attribute(
             "value")
         self.driver.find_element_by_xpath("//input[@id='btnSave']").click()
-        time.sleep(2)
+        time.sleep(5)
         self.driver.switch_to_alert().accept()
-        time.sleep(3)
+        time.sleep(5)
         print self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text
         self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text,
                         "Third Instalment Saved Successfully")
@@ -544,7 +565,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("testautomation_so2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -568,7 +589,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Rajni")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Rajjni")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -580,10 +601,10 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         buttons[1].click()
-        time.sleep(2)
+        time.sleep(6)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        time.sleep(2)
+        time.sleep(6)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
@@ -599,7 +620,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("testautomation_so2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -623,12 +644,12 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Rajni")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Rajjni")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
         print len(self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']"))
-        self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']")[1].click()
+        self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']")[0].click()
         self.driver.switch_to_active_element()
         time.sleep(1)
         buttons = self.driver.find_elements_by_xpath("//div[@class='ui-dialog-buttonset']/button")
@@ -636,10 +657,10 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         buttons[3].click()
-        time.sleep(2)
+        time.sleep(6)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        time.sleep(2)
+        time.sleep(6)
         self.driver.find_element_by_xpath("//select[@id='correctReason']/option[4]").click()
         time.sleep(1)
         self.driver.find_element_by_id("CorrectDescription").send_keys("Test Automation Invalid Data")
@@ -648,9 +669,9 @@ class login(unittest.TestCase):
             "//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
         for each in buttons:
             print each.text
-        time.sleep(2)
-        buttons[4].click()
-        time.sleep(2)
+        time.sleep(6)
+        buttons[5].click()
+        time.sleep(6)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
@@ -666,7 +687,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("testautomation_so2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -690,7 +711,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Rajni")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Rajjni")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -714,9 +735,9 @@ class login(unittest.TestCase):
             "//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
         for each in buttons:
             print each.text
-        time.sleep(2)
-        buttons[4].click()
-        time.sleep(2)
+        time.sleep(6)
+        buttons[5].click()
+        time.sleep(6)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
