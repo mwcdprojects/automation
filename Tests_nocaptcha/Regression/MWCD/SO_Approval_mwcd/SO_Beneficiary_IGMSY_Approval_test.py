@@ -4,9 +4,7 @@
 Testcase : IGMSY Approval queue consists only IGMSY related forms (Registration and instalments).
 Note ; IGMSY - None cases will not appear in the IGMSY approval queue
  test_01 :Register a beneficiary with valid Aadhaar card. Register for all three Instalments.
- test_02_FirstInstalment:  Approval of First Instalment by SO Officer.
- test_03_Second_Instalment: Approval of Second Instalment by SO Officer.
- test_04_Third_Instalment: Approval of Third Instalment by SO Officer.
+ test_02_FirstInstalment:  Approval SO Officer.
 
 """
 import sys
@@ -42,14 +40,30 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar1", self.aadhaar1
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar2", self.aadhaar2
+            else:
+                break
         self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
 
     def test_01(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
 
         # **************** #
@@ -57,11 +71,11 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
+        emailid.send_keys("dataentry_testautomation@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
-        password.send_keys("P@ssw0rd")
+        password.send_keys("P@ssw0rd1")
         print "Password entered"
         time.sleep(3)
         self.driver.find_element_by_id("btnSubmit").click()
@@ -76,11 +90,11 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[1]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
         time.sleep(1)
         print "Registration Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(
             "value")
@@ -139,7 +153,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
         time.sleep(1)
         print "Date of Reg of MCP card at AWC/ Subcenter => ", self.driver.find_element_by_xpath(
             "//input[@id='dpicker3']").get_attribute("value")
@@ -187,7 +201,7 @@ class login(unittest.TestCase):
     def test_02_IGMSY_Instalment_Approval(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
-        self.driver.get("http://mwcd1.fundright.in/BackOffice/useraccount/login")
+        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
         time.sleep(3)
 
         # **************** #
@@ -195,7 +209,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("block_panamaram@mailinator.com")
+        emailid.send_keys("testautomation_so2@mailinator.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -231,10 +245,10 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         buttons[1].click()
-        time.sleep(2)
+        time.sleep(5)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        time.sleep(2)
+        time.sleep(5)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)

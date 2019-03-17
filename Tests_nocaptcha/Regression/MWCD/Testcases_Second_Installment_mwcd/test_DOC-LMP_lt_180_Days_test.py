@@ -95,7 +95,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.id1)
         time.sleep(1)
-        print "Beneficiary ID is " , self.id1
+        print "Beneficiary ID is ", self.id1
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
@@ -113,7 +113,8 @@ class login(unittest.TestCase):
                         "Id Proof Number is allowed for Registration")
         self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Hethal")
         time.sleep(1)
-        print "Beneficairy Name is " , self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute("value")
+        print "Beneficairy Name is ", self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute(
+            "value")
         self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Hemanth")
         time.sleep(1)
 
@@ -176,7 +177,8 @@ class login(unittest.TestCase):
         time.sleep(5)
         self.driver.implicitly_wait(20)
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text,
+                        " The beneficiary application form is sent for approval")
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         installments[1].click()
         time.sleep(2)
@@ -206,9 +208,10 @@ class login(unittest.TestCase):
         errors = self.driver.find_elements_by_xpath("//span[@class='field-validation-error']")
         for msg in errors:
             print msg.text
-        self.assertTrue(errors[0].text , "Claim date should not be less than Registration/First Instalment date. Please enter the correct date")
-        self.assertTrue(errors[1].text , "Date of ANC must not be earlier than Date of Reg of MCP card. Please enter the correct date")
-
+        self.assertTrue(errors[0].text,
+                        "Claim date should not be less than Registration/First Instalment date. Please enter the correct date")
+        self.assertTrue(errors[1].text,
+                        "Date of ANC must not be earlier than Date of Reg of MCP card. Please enter the correct date")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

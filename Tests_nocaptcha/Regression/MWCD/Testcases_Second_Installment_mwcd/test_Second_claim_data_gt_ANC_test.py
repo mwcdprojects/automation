@@ -1,7 +1,7 @@
 #!C:\Python27\python.exe
 
 """
-Testcase :Date of Second Claim > Date of Registration
+Testcase :Date of Second Claim > ANC Date
 Expected Result: Should accept the form
 
 """
@@ -93,7 +93,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.id1)
         time.sleep(1)
-        print "Beneficiary ID is " , self.id1
+        print "Beneficiary ID is ", self.id1
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
@@ -109,10 +109,11 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
-        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Nilima")
+        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Adithi")
         time.sleep(1)
-        print "Beneficiary Name is " , self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute("value")
-        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Nadeem")
+        print "Beneficairy Name is ", self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute(
+            "value")
+        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Adarsh")
         time.sleep(1)
 
         self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9990000016")
@@ -162,7 +163,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Nilima")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Adithi")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -174,7 +175,8 @@ class login(unittest.TestCase):
         time.sleep(5)
         self.driver.implicitly_wait(20)
         print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text,
+                        " The beneficiary application form is sent for approval")
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         installments[1].click()
         time.sleep(2)
@@ -202,8 +204,8 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(1)
         print self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text , "Second Instalment Saved Successfully")
-
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='md-col-12']/p[2]").text,
+                        "Second Instalment Saved Successfully")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
