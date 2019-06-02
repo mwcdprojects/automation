@@ -1,0 +1,54 @@
+
+
+C:\Users\arche\automation\Tests_nocaptcha\Regression\Training9\Registration_Training9\Parallel_Regs>py.test -n 5
+============================= test session starts =============================
+platform win32 -- Python 2.7.9, pytest-3.8.2, py-1.6.0, pluggy-0.7.1
+rootdir: C:\Users\arche\automation\Tests_nocaptcha\Regression\Training9\Registration_Training9\Parallel_Regs, inifile:
+plugins: xdist-1.26.1, rerunfailures-6.0, forked-1.0.1
+gw0 [5] / gw1 [5] / gw2 [5] / gw3 [5] / gw4 [5]
+
+DevTools listening on ws://127.0.0.1:12904/devtools/browser/a9ffc3a3-5444-4bc5-b98e-26952133efbf
+
+DevTools listening on ws://127.0.0.1:12414/devtools/browser/eaae4faf-fb5d-4e56-8cc0-c096eb25ef9a
+
+DevTools listening on ws://127.0.0.1:12560/devtools/browser/93651c25-e80d-4bf0-900b-24994be8526f
+
+DevTools listening on ws://127.0.0.1:12147/devtools/browser/9b1d1652-a0d5-4163-a69f-7d0afb60bf5b
+
+DevTools listening on ws://127.0.0.1:12248/devtools/browser/a5a1e2d4-e337-482e-8c11-1f1844ce9e83
+.....                                                                    [100%]
+============================== warnings summary ===============================
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:764: DeprecationWarning: use driver.switch_to.active_element instead
+  warnings.warn("use driver.switch_to.active_element instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:788: DeprecationWarning: use driver.switch_to.alert instead
+  warnings.warn("use driver.switch_to.alert instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:764: DeprecationWarning: use driver.switch_to.active_element instead
+  warnings.warn("use driver.switch_to.active_element instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:788: DeprecationWarning: use driver.switch_to.alert instead
+  warnings.warn("use driver.switch_to.alert instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:764: DeprecationWarning: use driver.switch_to.active_element instead
+  warnings.warn("use driver.switch_to.active_element instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:788: DeprecationWarning: use driver.switch_to.alert instead
+  warnings.warn("use driver.switch_to.alert instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:764: DeprecationWarning: use driver.switch_to.active_element instead
+  warnings.warn("use driver.switch_to.active_element instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:788: DeprecationWarning: use driver.switch_to.alert instead
+  warnings.warn("use driver.switch_to.alert instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:764: DeprecationWarning: use driver.switch_to.active_element instead
+  warnings.warn("use driver.switch_to.active_element instead", DeprecationWarning)
+
+c:\python27\lib\site-packages\selenium\webdriver\remote\webdriver.py:788: DeprecationWarning: use driver.switch_to.alert instead
+  warnings.warn("use driver.switch_to.alert instead", DeprecationWarning)
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+=================== 5 passed, 10 warnings in 122.47 seconds ===================
+
+C:\Users\arche\automation\Tests_nocaptcha\Regression\Training9\Registration_Training9\Parallel_Regs>
