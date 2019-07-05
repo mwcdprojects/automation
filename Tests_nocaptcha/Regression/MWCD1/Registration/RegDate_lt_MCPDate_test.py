@@ -7,13 +7,8 @@ Expected Result: System should not allow to submit the form by throwing an error
 
 """
 import sys
-import collections
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 import string
 import random
@@ -36,12 +31,27 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.id2 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
+        self.ration_card = ''.join(random.choice(string.digits) for i in range(8))
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -55,7 +65,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
+        emailid.send_keys("testautomation123@example.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -74,7 +84,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -94,6 +104,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.ration_card)
         time.sleep(1)
+        print "Beneficiariy ID is ",self.ration_card
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
@@ -112,6 +123,7 @@ class login(unittest.TestCase):
                         "Id Proof Number is allowed for Registration")
         self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Harini M")
         time.sleep(1)
+        print "Beneficiary Name is " , self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Harsha M")
         time.sleep(1)
 

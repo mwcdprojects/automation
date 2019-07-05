@@ -54,7 +54,7 @@ class login(unittest.TestCase):
                     ''.join(random.choice(string.digits) for i in range(1, 12)))
             else:
                 break
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -189,13 +189,14 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        # self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        # self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text , " The beneficiary application form is sent for approval")
+        self.driver.switch_to_alert().accept()
         print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
         self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text,
                         "Instalment Data not exists")
-        print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text,
-                        "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
+        #print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
+        #self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text,
+         #               "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

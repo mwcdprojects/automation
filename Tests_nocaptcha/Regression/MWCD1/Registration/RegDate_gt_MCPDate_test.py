@@ -35,14 +35,27 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.id2 = ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
+        self.ration_card = ''.join(random.choice(string.digits) for i in range(8))
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
-
-
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
     def test_01(self):
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
@@ -54,7 +67,7 @@ class login(unittest.TestCase):
         # **************** #
 
         emailid = self.driver.find_element_by_id("Email")
-        emailid.send_keys("testautomation12@example.com")
+        emailid.send_keys("testautomation123@example.com")
         time.sleep(3)
         print "Email entered"
         password = self.driver.find_element_by_id("password")
@@ -73,7 +86,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -83,7 +96,7 @@ class login(unittest.TestCase):
             "value")
         Aadhaar_avaialbilty_data = self.driver.find_elements_by_xpath("//input[@id='BeneficiaryAadharExistVal']")
         time.sleep(1)
-        #print Aadhaar_avaialbilty_data[1].get_attribute('value')
+        # print Aadhaar_avaialbilty_data[1].get_attribute('value')
         Aadhaar_avaialbilty_data[1].click()
         time.sleep(1)
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
@@ -93,12 +106,12 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.ration_card)
         time.sleep(1)
+        print "Benificiary ID is :", self.ration_card
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
-
 
         self.driver.find_element_by_xpath("//select[@id='fatherAltID']/option[4]").click()
         time.sleep(1)
@@ -111,9 +124,10 @@ class login(unittest.TestCase):
                         "Id Proof Number is allowed for Registration")
         self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Jyothi Kundar")
         time.sleep(1)
+        print "Benificiary Name is ", self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute(
+            "value")
         self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Jitendra Kundar")
         time.sleep(1)
-
 
         self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9989009999")
         time.sleep(1)
@@ -159,7 +173,7 @@ class login(unittest.TestCase):
         self.driver.find_element_by_xpath("//a[@id='ifscButton1']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblStatus']").text
-        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text , "Valid IFSC Code")
+        self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblStatus']").text, "Valid IFSC Code")
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
@@ -174,9 +188,9 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
-
+        print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text,
+                        " The beneficiary application form is sent for approval")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

@@ -42,11 +42,11 @@ class login(unittest.TestCase):
         self.hus_aadhaar = []
         self.health_ids = []
         self.account_nos = []
-        for i in range(10):
+        for i in range(20):
             self.accountno = ''.join(random.choice(string.digits) for i in range(18))
             if self.accountno not in self.account_nos:
                 self.account_nos.append(self.accountno)
-        for i in range(10):
+        for i in range(20):
             self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
             if self.aadhaar1 not in self.ben_adhaar and int(self.aadhaar1[0]) != 0:
                 self.ben_adhaar.append(self.aadhaar1)
@@ -56,13 +56,13 @@ class login(unittest.TestCase):
             if self.aadhaar2 not in self.hus_aadhaar and int(self.aadhaar2[0]) != 0 and self.aadhaar2 not in self.ben_adhaar:
                 self.hus_aadhaar.append(self.aadhaar2)
 
-        for i in range(10):
+        for i in range(20):
             self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
                 random.choice(string.digits) for i in range(4))
             if self.health_id not in self.health_ids:
                 self.health_ids.append(self.health_id)
 
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -77,9 +77,9 @@ class login(unittest.TestCase):
         # **************** #
         print "Ben_aadhaar ids" , self.ben_adhaar
         print "Hus Aadhaar ids" , self.hus_aadhaar
-        for i in range(10):
+        for i in range(12):
             emailid = self.driver.find_element_by_id("Email")
-            emailid.send_keys("bulk_registration@mailinator.com")
+            emailid.send_keys("testautomation123@mailinator.com")
             time.sleep(3)
             print "Email entered"
             password = self.driver.find_element_by_id("password")
@@ -98,9 +98,9 @@ class login(unittest.TestCase):
 
             self.driver.find_element_by_id("dpicker1").click()
             time.sleep(1)
-            self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+            self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[3]").click()
             time.sleep(1)
-            self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
+            self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[1]").click()
             time.sleep(1)
             self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
             time.sleep(1)
@@ -146,7 +146,7 @@ class login(unittest.TestCase):
             time.sleep(2)
             self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
             time.sleep(1)
-            self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[1]").click()
+            self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
             time.sleep(1)
             self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[3]").click()
             time.sleep(1)
@@ -195,8 +195,8 @@ class login(unittest.TestCase):
             self.driver.switch_to_alert().accept()
             time.sleep(5)
             self.driver.implicitly_wait(20)
-            print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-            self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+            print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
+            self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text , " The beneficiary application form is sent for approval")
             time.sleep(3)
             self.driver.find_element_by_xpath("//a[@class='dropdown']").click()
             time.sleep(2)

@@ -40,7 +40,7 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
         self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -73,13 +73,14 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[6]").click()
+        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[1]").click()
         time.sleep(1)
-        print "Registration Date => " , self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute("value")
+        print "Registration Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(
+            "value")
         self.driver.find_elements_by_xpath("//input[@id='MBPSchemeValue']")[0].click()
         time.sleep(2)
         self.driver.find_elements_by_xpath("//input[@id='MBPInstalmentRecieved']")[2].click()
@@ -137,7 +138,8 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
         time.sleep(1)
-        print "Date of Reg of MCP card at AWC/ Subcenter => " , self.driver.find_element_by_xpath("//input[@id='dpicker3']").get_attribute("value")
+        print "Date of Reg of MCP card at AWC/ Subcenter => ", self.driver.find_element_by_xpath(
+            "//input[@id='dpicker3']").get_attribute("value")
         self.driver.find_element_by_xpath("//input[@id='AddressLine1']").send_keys('802')
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='AddressLine2']").send_keys('16th Cross')
@@ -171,12 +173,13 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        self.driver.switch_to_alert().accept()
+        # self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
         print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text , "Instalment Data not exists")
-        print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text , "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
-
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text,
+                        "Instalment Data not exists")
+        # print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
+        # self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text , "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
