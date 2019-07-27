@@ -12,7 +12,7 @@ import time
 
 class login(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
         self.email = ""
         self.name = ""
         self.pwd = ""

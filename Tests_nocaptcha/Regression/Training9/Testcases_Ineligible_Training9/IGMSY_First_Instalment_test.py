@@ -189,7 +189,10 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
+<<<<<<< HEAD
+=======
         self.driver.switch_to_alert().accept()
+>>>>>>> cb5ba20e36e3d450855cabab785e72043b9f5657
         # self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text , " The beneficiary application form is sent for approval")
         #print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
         #self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text,

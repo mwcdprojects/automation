@@ -48,11 +48,12 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
         self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(11)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
         self.tomorrow = datetime.date.today() + datetime.timedelta(days=2)
 
 
     def test_01(self):
+
         self.driver.implicitly_wait(20)
         self.driver.maximize_window()
         self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
@@ -61,7 +62,7 @@ class login(unittest.TestCase):
         # **************** #
         # Login validation #
         # **************** #
-
+        """
         emailid = self.driver.find_element_by_id("Email")
         emailid.send_keys("dataentry_testautomation@mailinator.com")
         time.sleep(3)
@@ -98,7 +99,7 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Renuka Devi")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Ramas")
         time.sleep(1)
         print "Beneficiary Name is ", self.driver.find_element_by_id("txtNameAsInAadhar").get_attribute("value")
         self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
@@ -167,7 +168,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Renuka Devi")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Ramas")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -178,8 +179,9 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text,
+                        "The beneficiary application form is sent for approval")
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         installments[1].click()
         time.sleep(2)
@@ -295,7 +297,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Renuka Devi")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Ramas")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -353,7 +355,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Renuka Devi")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Ramas")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -412,7 +414,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Renuka Devi")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Ramas")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -448,6 +450,27 @@ class login(unittest.TestCase):
         # DB update for Aadhaar verification #
         # ********************************** #
 
+        """
+        conn = mysql.connector.connect(host='bl-mbp-mysql.southindia.cloudapp.azure.com', port=3307, user='user',
+                                       password='HWf6frqGoR61', db='MWCD_TEST')
+        a = conn.cursor()
+        a.execute('''select * from TbBeneficiary where  HealthId = ''' + '"' + self.health_id + '"')
+
+        beneficiaryId = a.fetchall()[0][0]
+        print "BeneficiaryId:  ", beneficiaryId
+        # a.execute('select * from TbFatherDetails where BeneficiaryId = ' + str(beneficiaryId) + ';')
+        # father_aadhaar = a.fetchall()[0][4]
+        # print father_aadhaar
+
+        a.execute(
+            'update TbBeneficiary set IsAadhaarAuthenticated = 1 where BeneficiaryId = ' + str(beneficiaryId) + ';')
+        conn.commit()
+        a.execute(
+            'update TbFatherDetails set IsAadhaarAuthenticated = 1 where BeneficiaryId = ' + str(beneficiaryId) + ';')
+        conn.commit()
+        #self.driver.refresh()
+        #time.sleep(3)
+
         emailid = self.driver.find_element_by_id("Email")
         emailid.send_keys("dataentry_testautomation@mailinator.com")
         time.sleep(3)
@@ -462,23 +485,10 @@ class login(unittest.TestCase):
         print self.driver.title
         time.sleep(1)
 
-        conn = mysql.connector.connect(host='bl-mbp-mysql.southindia.cloudapp.azure.com', port=3306, user='user',
-                                       password='HWf6frqGoR61', db='MWCD_TEST')
-        a = conn.cursor()
 
-        a.execute('select * from TbBeneficiary where  AadharNo = '+self.aadhaar1+ ';')
-        ben_id = a.fetchall()[0][0]
-        print ben_id
-        a.execute('select * from TbFatherDetails where BeneficiaryId = ' + str(ben_id) + ';')
-        father_aadhaar =  a.fetchall()[0][4]
-        print father_aadhaar
 
-        a.execute('update TbBeneficiary set IsAadhaarAuthenticated = 1 where BeneficiaryId = ' +str(ben_id)+ ';')
-        conn.commit()
-        a.execute('update TbFatherDetails set IsAadhaarAuthenticated = 1 where BeneficiaryId = ' +str(ben_id)+ ';')
-        conn.commit()
 
-        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[2]").click()
+        self.driver.find_element_by_xpath("//select[@id='beneficiaryAltID']/option[3]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.aadhaar1)
         time.sleep(2)
@@ -486,6 +496,9 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_link_text(self.aadhaar1).click()
         time.sleep(2)
+        #beneficiaryId = str(self.driver.find_element_by_id("PFMSBeneficiaryCode").get_attribute("value").replace('PFMS',''))
+
+
         self.driver.find_element_by_id("imgAadharValid")
         time.sleep(1)
         self.assertEqual(self.driver.find_element_by_xpath("//table[@class='table table-bordered']/tbody/tr[1]/td[5]/label").text , "Both Beneficiary and Husband Aadhaar verified")
@@ -503,16 +516,16 @@ class login(unittest.TestCase):
 
         # Payment Details verification
         time.sleep(5)
-        pfms_code = "PFMS" + str(ben_id)
+        pfms_code = "PFMS" + str(beneficiaryId)
         pfms_status = "ACCP"
         print "Updating db"
         conn = mysql.connector.connect(host='bl-mbp-mysql.southindia.cloudapp.azure.com', port=3306, user='user',
                                        password='HWf6frqGoR61', db='MWCD_TEST')
         a = conn.cursor()
         a.execute("""update TbBeneficiary set PFMSBeneficiaryCode = %s where BeneficiaryId = %s""",
-                  (pfms_code, str(ben_id)))
+                  (pfms_code, str(beneficiaryId)))
         conn.commit()
-        a.execute("""update TbBeneficiary set PFMSStatus = %s where BeneficiaryId = %s""", (pfms_status, ben_id))
+        a.execute("""update TbBeneficiary set PFMSStatus = %s where BeneficiaryId = %s""", (pfms_status, beneficiaryId))
         conn.commit()
         print "updated db"
         time.sleep(5)
@@ -555,7 +568,7 @@ class login(unittest.TestCase):
 
 
         a.execute("""update TbBeneficiaryClaim set PFMSStatusDate = %s where BeneficiaryId = %s""" ,
-                  (self.tomorrow , str(ben_id)))
+                  (self.tomorrow , str(beneficiaryId)))
         conn.commit()
         # Login and verify the message "Payment Details Verified" in web page
 
@@ -595,7 +608,7 @@ class login(unittest.TestCase):
         time.sleep(2)
 
         a.execute("""update TbBeneficiaryClaim set PFMSStatus = %s where BeneficiaryId = %s""",
-                  (pfms_status, str(ben_id)))
+                  (pfms_status, str(beneficiaryId)))
         conn.commit()
         emailid = self.driver.find_element_by_id("Email")
         emailid.send_keys("dataentry_testautomation@mailinator.com")
