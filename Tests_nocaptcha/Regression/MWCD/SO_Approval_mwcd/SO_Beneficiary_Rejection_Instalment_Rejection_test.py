@@ -26,6 +26,7 @@ import random
 import verhoeff
 
 
+
 class login(unittest.TestCase):
     def setUp(self):
         self.email = ""
@@ -62,7 +63,9 @@ class login(unittest.TestCase):
                 print "Aadhaar2", self.aadhaar2
             else:
                 break
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
+
+
 
     def First_Second_Third_Instalments_Registration(self):
         self.driver.implicitly_wait(20)
@@ -110,7 +113,7 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Girijaaa")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Girijj")
         time.sleep(1)
         print "Beneficiary Name is ", self.driver.find_element_by_id("txtNameAsInAadhar").get_attribute("value")
         self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
@@ -179,7 +182,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Girijaaa")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Girijj")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -190,14 +193,14 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text,
+        print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text,
                         " The beneficiary application form is sent for approval")
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         installments[1].click()
-        time.sleep(3)
+        time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
-        time.sleep(3)
+        time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[8]").click()
@@ -302,9 +305,9 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL").click()
         time.sleep(2)
-        # print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
-        # print self.driver.find_element_by_xpath("//div[@class='tab-content']")
-        # print self.driver.find_element_by_id("Beneficiary")
+        #print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
+        #print self.driver.find_element_by_xpath("//div[@class='tab-content']")
+        #print self.driver.find_element_by_id("Beneficiary")
         frame = self.driver.find_element_by_xpath("//iframe[@id='approvalQueueGrid']")
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
@@ -322,19 +325,18 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         buttons[2].click()
-        time.sleep(6)
+        time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        time.sleep(6)
+        time.sleep(2)
         self.driver.find_element_by_id("Description").send_keys("Test Automation Invalid Data")
         time.sleep(1)
-        buttons = self.driver.find_elements_by_xpath(
-            "//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
+        buttons = self.driver.find_elements_by_xpath("//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
         for each in buttons:
             print each.text
-        time.sleep(6)
+        time.sleep(2)
         buttons[4].click()
-        time.sleep(6)
+        time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
@@ -385,7 +387,7 @@ class login(unittest.TestCase):
         Aadhar_husband_availability = self.driver.find_elements_by_xpath("//input[@id='FatherAadharExistVal']")
         Aadhar_husband_availability[0].click()
         time.sleep(1)
-        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Shnthii")
+        self.driver.find_element_by_id("txtNameAsInAadhar").send_keys("Shanthi")
         time.sleep(1)
         self.driver.find_element_by_id("txtAadhar").send_keys(self.aadhaar1)
         time.sleep(1)
@@ -452,7 +454,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Shnthii")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Shanthi")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -463,8 +465,8 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text,
+        print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text,
                         " The beneficiary application form is sent for approval")
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
         installments[1].click()
@@ -497,7 +499,7 @@ class login(unittest.TestCase):
                         "Second Instalment Saved Successfully")
         time.sleep(2)
         installments = self.driver.find_elements_by_xpath("//div[@class='col-md-12']/a")
-        time.sleep(6)
+        time.sleep(2)
         installments[2].click()
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='dpicker']").click()
@@ -582,7 +584,7 @@ class login(unittest.TestCase):
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Shnthii")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Shanthi")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -594,13 +596,14 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         buttons[1].click()
-        time.sleep(6)
-        print self.driver.switch_to_alert().text
-        self.driver.switch_to_alert().accept()
-        time.sleep(6)
+        time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
+        print self.driver.switch_to_alert().text
+        self.driver.switch_to_alert().accept()
+        time.sleep(2)
+    
 
     def test_05_SecondInstallmet_Rejection(self):
         self.driver.implicitly_wait(20)
@@ -630,19 +633,19 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_partial_link_text("INSTALMENT APPROVAL").click()
         time.sleep(2)
-        # print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
-        # print self.driver.find_element_by_xpath("//div[@class='tab-content']")
-        # print self.driver.find_element_by_id("Beneficiary")
+        #print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
+        #print self.driver.find_element_by_xpath("//div[@class='tab-content']")
+        #print self.driver.find_element_by_id("Beneficiary")
         frame = self.driver.find_element_by_xpath("//iframe[@id='approvalQueueGrid1']")
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Shnthii")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Shanthi")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
         print len(self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']"))
-        self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']")[0].click()
+        self.driver.find_elements_by_xpath("//a[@class='btn btn-info approve-btns']")[1].click()
         self.driver.switch_to_active_element()
         time.sleep(1)
         buttons = self.driver.find_elements_by_xpath("//div[@class='ui-dialog-buttonset']/button")
@@ -660,13 +663,14 @@ class login(unittest.TestCase):
             "//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
         for each in buttons:
             print each.text
-        time.sleep(6)
+        time.sleep(2)
         self.driver.find_elements_by_xpath(
             "//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/div/button[2]")[1].click()
-        time.sleep(6)
+        time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
+
 
     def test_06_ThirdInstallmet_Rejection(self):
         self.driver.implicitly_wait(20)
@@ -696,14 +700,14 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_partial_link_text("INSTALMENT APPROVAL").click()
         time.sleep(2)
-        # print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
-        # print self.driver.find_element_by_xpath("//div[@class='tab-content']")
-        # print self.driver.find_element_by_id("Beneficiary")
+        #print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
+        #print self.driver.find_element_by_xpath("//div[@class='tab-content']")
+        #print self.driver.find_element_by_id("Beneficiary")
         frame = self.driver.find_element_by_xpath("//iframe[@id='approvalQueueGrid1']")
         self.driver.switch_to_frame(frame)
         self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Shnthii")
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Shanthi")
         time.sleep(1)
         self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
         time.sleep(2)
@@ -715,23 +719,24 @@ class login(unittest.TestCase):
         for each in buttons:
             print each.text
         buttons[2].click()
-        time.sleep(6)
+        time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        time.sleep(6)
+        time.sleep(2)
         self.driver.find_element_by_id("Description").send_keys("Test Automation Invalid Data")
         time.sleep(1)
         buttons = self.driver.find_elements_by_xpath(
             "//button[@class='ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
         for each in buttons:
             print each.text
-        time.sleep(6)
+        time.sleep(2)
         self.driver.find_elements_by_xpath(
             "//div[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/div/button[2]")[1].click()
-        time.sleep(6)
+        time.sleep(2)
         print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
         time.sleep(2)
+
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
@@ -746,7 +751,6 @@ class login(unittest.TestCase):
             print self.driver.title
             print "User Logged out Successfully"
             self.driver.quit()
-
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(login)

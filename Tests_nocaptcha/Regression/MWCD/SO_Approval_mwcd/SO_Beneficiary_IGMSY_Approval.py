@@ -1,8 +1,10 @@
 #!C:\Python27\python.exe
 
 """
-Testcase :IGMSY : First and Second Instalment
-Expected Result: Ineligible for the scheme.
+Testcase : IGMSY Approval queue consists only IGMSY related forms (Registration and instalments).
+Note ; IGMSY - None cases will not appear in the IGMSY approval queue
+ test_01 :Register a beneficiary with valid Aadhaar card. Register for all three Instalments.
+ test_02_FirstInstalment:  Approval SO Officer.
 
 """
 import sys
@@ -44,6 +46,7 @@ class login(unittest.TestCase):
             if int(self.aadhaar1[0]) == 0:
                 self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
                     ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar1", self.aadhaar1
             else:
                 break
         self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
@@ -52,10 +55,10 @@ class login(unittest.TestCase):
             if int(self.aadhaar2[0]) == 0:
                 self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
                     ''.join(random.choice(string.digits) for i in range(1, 12)))
+                print "Aadhaar2", self.aadhaar2
             else:
                 break
         self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
-
 
     def test_01(self):
         self.driver.implicitly_wait(20)
@@ -91,13 +94,13 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[1]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
         time.sleep(1)
         print "Registration Date => ", self.driver.find_element_by_xpath("//input[@id='dpicker1']").get_attribute(
             "value")
         self.driver.find_elements_by_xpath("//input[@id='MBPSchemeValue']")[0].click()
         time.sleep(2)
-        self.driver.find_elements_by_xpath("//input[@id='MBPInstalmentRecieved']")[2].click()
+        self.driver.find_elements_by_xpath("//input[@id='MBPInstalmentRecieved']")[1].click()
         time.sleep(1)
         Aadhaar_avaialbilty_data = self.driver.find_elements_by_xpath("//input[@id='BeneficiaryAadharExistVal']")
         time.sleep(1)
@@ -111,7 +114,6 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='txtAlternateNumber']").send_keys(self.id1)
         time.sleep(1)
-        print "Beneficiary ID is " , self.id1
         self.driver.find_element_by_xpath("//a[@id='BenAlternateIdCheck']").click()
         time.sleep(2)
         print self.driver.find_element_by_xpath("//label[@id='lblBenAlternateIdStatus']").text
@@ -127,10 +129,9 @@ class login(unittest.TestCase):
         print self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text
         self.assertTrue(self.driver.find_element_by_xpath("//label[@id='lblHusbandAlternateIdStatus']").text,
                         "Id Proof Number is allowed for Registration")
-        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Zuana")
+        self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").send_keys("Sravanthi")
         time.sleep(1)
-        print "Beneficiary Name is " , self.driver.find_element_by_xpath("//input[@id='NameAsInIDCard']").get_attribute("value")
-        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Zain")
+        self.driver.find_element_by_xpath("//input[@id='FNameAsInIDCard']").send_keys("Sravan")
         time.sleep(1)
 
         self.driver.find_element_by_xpath("//input[@id='Phone']").send_keys("9990000011")
@@ -152,7 +153,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[3]/td[4]").click()
+        self.driver.find_element_by_xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[2]/td[6]").click()
         time.sleep(1)
         print "Date of Reg of MCP card at AWC/ Subcenter => ", self.driver.find_element_by_xpath(
             "//input[@id='dpicker3']").get_attribute("value")
@@ -178,7 +179,7 @@ class login(unittest.TestCase):
         time.sleep(1)
         self.driver.find_element_by_xpath("//input[@id='BankAccountNo']").send_keys(self.accountno)
         time.sleep(2)
-        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Zuana")
+        self.driver.find_element_by_xpath("//input[@id='txtAccountHoldersName']").send_keys("Sravanthi")
         time.sleep(2)
         self.driver.find_element_by_xpath("//input[@id='btnVerify']").click()
         time.sleep(5)
@@ -190,13 +191,69 @@ class login(unittest.TestCase):
         time.sleep(5)
         self.driver.implicitly_wait(20)
         # self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text , " The beneficiary application form is sent for approval")
+        # print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
+        # self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text,
+        #               "Instalment Data not exists")
+        print self.driver.find_element_by_xpath("//div[@class='row']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='row']/h5").text,
+                        "Beneficiary can apply only for Third instalment as the beneficiary has already recieved First Instalment under old MBP(IGMSY) scheme")
+
+    def test_02_IGMSY_Instalment_Approval(self):
+        self.driver.implicitly_wait(20)
+        self.driver.maximize_window()
+        self.driver.get("http://mwcd.fundright.in/BackOffice/useraccount/login")
+        time.sleep(3)
+
+        # **************** #
+        # Login validation #
+        # **************** #
+
+        emailid = self.driver.find_element_by_id("Email")
+        emailid.send_keys("testautomation_so2@mailinator.com")
+        time.sleep(3)
+        print "Email entered"
+        password = self.driver.find_element_by_id("password")
+        password.send_keys("P@ssw0rd")
+        print "Password entered"
+        time.sleep(3)
+        self.driver.find_element_by_id("btnSubmit").click()
+        time.sleep(4)
+        # self.assertIn("Approval Queue - MWCD Backoffice", self.driver.title)
+        print self.driver.title
+        time.sleep(3)
+
+        # Beneficiary Approval
+
+        self.driver.find_element_by_partial_link_text("IGMSY APPROVAL").click()
+        time.sleep(2)
+        #print self.driver.find_element_by_partial_link_text("BENEFICIARY APPROVAL")
+        #print self.driver.find_element_by_xpath("//div[@class='tab-content']")
+        #print self.driver.find_element_by_id("Beneficiary")
+        frame = self.driver.find_element_by_xpath("//iframe[@id='approvalQueueGrid6']")
+        self.driver.switch_to_frame(frame)
+        self.driver.find_elements_by_xpath("//span[@class='grid-filter-btn']")[1].click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//input[@class='grid-filter-input form-control']").send_keys("Sravanthi")
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//button[@class='btn btn-primary grid-apply']").click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath("//a[@class='btn btn-info approve-btns']").click()
+        self.driver.switch_to_active_element()
+        time.sleep(1)
+        buttons = self.driver.find_elements_by_xpath("//div[@class='ui-dialog-buttonset']/button")
+        print len(buttons)
+        for each in buttons:
+            print each.text
+        buttons[1].click()
+        time.sleep(2)
+        print self.driver.switch_to_alert().text
         self.driver.switch_to_alert().accept()
-        print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text,
-                        "Instalment Data not exists")
-        #print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
-        #self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text,
-         #               "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
+        time.sleep(2)
+        print self.driver.switch_to_alert().text
+        self.driver.switch_to_alert().accept()
+        time.sleep(2)
+
+
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":
@@ -211,7 +268,6 @@ class login(unittest.TestCase):
             print self.driver.title
             print "User Logged out Successfully"
             self.driver.quit()
-
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(login)

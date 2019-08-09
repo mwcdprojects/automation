@@ -38,9 +38,23 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1,12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -173,8 +187,8 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
+        print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text , " The beneficiary application form is sent for approval")
         data = self.driver.find_elements_by_xpath("//table[@class='table table-bordered']/tbody/tr[2]/td")
         for each in data:
             print each.text
