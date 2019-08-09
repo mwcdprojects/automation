@@ -35,7 +35,7 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1, 12)))
         self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1, 12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -68,15 +68,13 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-<<<<<<< HEAD
 
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
 
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
 
-=======
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
->>>>>>> c8f8064b87833dafb537deeffbbc4f98f6ce934c
+
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -173,12 +171,13 @@ class login(unittest.TestCase):
         time.sleep(2)
         self.driver.switch_to_alert().accept()
         time.sleep(5)
+        self.driver.switch_to_alert().accept()
         self.driver.implicitly_wait(20)
         #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
         print self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text
         self.assertTrue(self.driver.find_element_by_xpath("//div[@class='example table-responsive']/p").text , "Instalment Data not exists")
-        print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
-        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text , "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
+        #print self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text
+        #self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-10']/div/ol/li/h5").text , "The beneficiary will not be eligible to apply for benefits under the scheme as the beneficiary has received first and second instalment under old MBP scheme (IGMSY)")
 
 
     def tearDown(self):

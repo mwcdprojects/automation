@@ -35,7 +35,7 @@ class login(unittest.TestCase):
             random.choice(string.digits) for i in range(4))
         self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1, 12)))
         self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1, 12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -66,17 +66,11 @@ class login(unittest.TestCase):
 
         # Fill in all the valid details #
 
+        # Fill in all the valid details #
+
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-<<<<<<< HEAD
-<<<<<<< HEAD
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
-=======
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
->>>>>>> c8f8064b87833dafb537deeffbbc4f98f6ce934c
-=======
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
->>>>>>> c8f8064b87833dafb537deeffbbc4f98f6ce934c
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[3]").click()
         time.sleep(1)
@@ -174,8 +168,9 @@ class login(unittest.TestCase):
         self.driver.switch_to_alert().accept()
         time.sleep(5)
         self.driver.implicitly_wait(20)
-        self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
-        print self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text
+        self.assertTrue(self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text,
+                        " The beneficiary application form is sent for approval")
+        print self.driver.find_element_by_xpath("//div[@class='col-md-12']/h5").text
 
     def tearDown(self):
         if self.driver.title == "PRADHAN MANTRI MATRU VANDANA YOJANA":

@@ -35,9 +35,23 @@ class login(unittest.TestCase):
         self.accountno = ''.join(random.choice(string.digits) for i in range(18))
         self.health_id = "H" + ''.join(random.choice(string.ascii_letters) for i in range(4)) + ''.join(
             random.choice(string.digits) for i in range(4))
-        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1, 12)))
-        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(''.join(random.choice(string.digits) for i in range(1, 12)))
-        self.driver = webdriver.Chrome("C:\\Users\\arche\\Downloads\\chromedriver_win32\\chromedriver.exe")
+        self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar1[0]) == 0:
+                self.aadhaar1 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+            ''.join(random.choice(string.digits) for i in range(1, 12)))
+        for i in range(20):
+            if int(self.aadhaar2[0]) == 0:
+                self.aadhaar2 = verhoeff.VerhoeffChecksum().generateVerhoeff(
+                    ''.join(random.choice(string.digits) for i in range(1, 12)))
+            else:
+                break
+        self.driver = webdriver.Chrome("C:\\Users\\arche\\chromedriver_win32\\chromedriver.exe")
 
 
     def test_01(self):
@@ -70,15 +84,7 @@ class login(unittest.TestCase):
 
         self.driver.find_element_by_id("dpicker1").click()
         time.sleep(1)
-<<<<<<< HEAD
-<<<<<<< HEAD
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[1]").click()
-=======
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
->>>>>>> c8f8064b87833dafb537deeffbbc4f98f6ce934c
-=======
-        self.driver.find_element_by_xpath("//select[@class='ui-datepicker-year']/option[2]").click()
->>>>>>> c8f8064b87833dafb537deeffbbc4f98f6ce934c
         time.sleep(1)
         self.driver.find_element_by_xpath("//select[@class='ui-datepicker-month']/option[2]").click()
         time.sleep(1)
@@ -182,9 +188,9 @@ class login(unittest.TestCase):
         time.sleep(5)
         self.driver.implicitly_wait(20)
         #self.assertTrue(self.driver.find_element_by_xpath("/html/body/div[2]/div/div[1]/div/h5").text , " The beneficiary application form is sent for approval")
-        # print self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text
-        # self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text,
-        #                 "Date of Reg of MCP card must not exceed the Beneficiary Registration Date. Please enter the correct date")
+        print self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text
+        self.assertTrue(self.driver.find_element_by_xpath("//span[@class='field-validation-error']").text,
+                        "Date of Reg of MCP card must not exceed the Beneficiary Registration Date. Please enter the correct date")
 
 
     def tearDown(self):
